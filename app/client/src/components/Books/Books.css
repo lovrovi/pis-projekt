@@ -1,0 +1,105 @@
+.books{
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.booksHeader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.booksHeaderTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.booksHeaderSection{
+    width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.booksTable{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.actionButtons{
+    display: flex;
+}
+
+.actionButton{
+    margin: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.actionButton:hover {
+    color: rgb(102, 102, 245);
+    cursor: pointer;
+}
+
+.booksLoading img{
+    width: 50px;
+    height: 50px;
+}
+
+.booksLoading{
+    margin-top: 50px;
+}
+
+.booksDetails{
+    display: flex;
+    flex-direction: row;
+    width: 1200px;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+ 
+.bookDetailsField{
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+ 
+.detailsButtons{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+ 
+.bookButton{
+    background-color: whitesmoke;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 20px;
+}
+ 
+.bookButton:hover{
+    cursor: pointer;
+    background-color: rgb(181, 192, 204);
+    color: white;
+}
+ 
+.booksContainer{
+    height: 50%;
+}
+ 
+.booksDetails form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}

@@ -1,0 +1,38 @@
+.searchContainer{
+    display: flex;
+    justify-content: space-around;
+}
+
+.searchField input{
+    border-radius: 10px;
+    outline: none;
+    border-color: grey;
+    padding: 3px;
+}
+
+.searchField{
+    display: flex;
+    align-items: center;
+}
+
+.errorMsg{
+    color: red;
+    text-align: center;
+    height: 20px;
+    width: 200px;
+    overflow-wrap: break-word;
+}
+
+.searchBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.subTitle{
+    display: flex;
+    width: 170px;
+    align-items: center;
+    text-align: center;
+}

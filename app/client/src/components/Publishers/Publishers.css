@@ -1,0 +1,85 @@
+.publishers {
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.publishersHeader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.publishersHeaderTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.PublishersHeaderSection{
+    width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.publishersTable {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.actionButtons{
+    display: flex;
+    justify-content: center;
+}
+
+.actionButton:hover{
+    cursor: pointer;
+    color: rgb(102, 102, 245);
+}
+
+.publishersLoading img {
+    width: 50px;
+    height: 50px;
+}
+
+.publishersLoading {
+    margin-top: 50px;
+}
+
+.publisherDetails{
+    display: flex;
+    justify-content: center;
+}
+
+.publisherDetailsField{
+    padding: 10px;
+}
+
+.detailsButtons{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.publisherButton{
+    background-color: whitesmoke;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 20px;
+}
+
+.publisherButton:hover{
+    cursor: pointer;
+    background-color: rgb(181, 192, 204);
+    color: white;
+}
