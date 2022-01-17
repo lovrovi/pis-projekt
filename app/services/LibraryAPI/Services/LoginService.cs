@@ -1,6 +1,5 @@
 ﻿using LibraryAPI.Data;
-using LibraryAPI.Models;
-using LibraryAPI.Request;
+using LibraryAPI.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -23,14 +22,15 @@ namespace LibraryAPI.Services
             _config = config;
         }
 
-        private string GenerateJSONWebToken(string userName)
+        private string GenerateJSONWebToken(string userName, int id, GroupType groupType)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[] {
                 new Claim(JwtRegisteredClaimNames.Sub, userName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim("Id", id.ToString()),
+                new Claim("Role", groupType.ToString())
             };
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
@@ -49,7 +49,7 @@ namespace LibraryAPI.Services
             {
                 return null;
             }
-            var tokenString = GenerateJSONWebToken(user.UserName);
+            var tokenString = GenerateJSONWebToken(user.UserName, user.Id, user.GroupType);
 
             return tokenString;
         }

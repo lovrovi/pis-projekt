@@ -216,6 +216,9 @@ namespace LibraryAPI.Data
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<AuthorBook> AuthorsBooks { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Loan> Loans { get; set; }
 
     }
 }
