@@ -7,7 +7,8 @@ import { SearchContainer } from '../../containers/SearchContainer/SearchContaine
 import Button from '@material-ui/core/Button'
 import { Title } from '../../containers/Title/Title'
 import { Link } from 'react-router-dom'
-import {generateLink, routesConfiguration as routes} from '../../Router/routes'
+import { generateLink, routesConfiguration as routes } from '../../Router/routes'
+import { isAdmin } from '../../customHooks/isAdmin'
 
 const Books = () => {
     const [searchValue, setSearchValue] = useState("")
@@ -25,9 +26,12 @@ const Books = () => {
                 </div>
                 <div className="booksHeaderSection">
                     <Link to={generateLink(routes.BOOK_CREATE)}>
-                        <Button variant="contained" color="primary">
-                            Add
-                        </Button>
+                        {
+                            isAdmin() &&
+                            <Button variant="contained" color="primary">
+                                Add
+                            </Button>
+                        }
                     </Link>
                     <SearchContainer
                         value={searchValue}
@@ -37,7 +41,7 @@ const Books = () => {
                     />
                 </div>
             </div>
-            <BooksTable searchValue={searchValue}/>
+            <BooksTable searchValue={searchValue} />
         </div>
     )
 }

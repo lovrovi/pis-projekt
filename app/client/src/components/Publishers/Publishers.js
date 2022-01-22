@@ -6,6 +6,7 @@ import { getPublishers } from '../../redux/actions/publishers/publishers'
 import { CreatePublisherModal } from '../../components/Publishers/CreatePublisherModal'
 import Button from '@material-ui/core/Button'
 import { Title } from '../../containers/Title/Title'
+import { isAdmin } from '../../customHooks/isAdmin'
 
 const Publishers = (props) => {
     const [showModal, setModalVisbility] = useState(false);
@@ -29,9 +30,12 @@ const Publishers = (props) => {
                 </div>
                 <div className="PublishersHeaderSection">
                     <div onClick={handleShowModal}>
-                        <Button variant="contained" color="primary">
-                            Add
-                        </Button>
+                        {
+                            isAdmin() &&
+                            <Button variant="contained" color="primary">
+                                Add
+                            </Button>
+                        }
                     </div>
                     <SearchContainer
                         value={searchValue}

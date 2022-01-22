@@ -6,7 +6,8 @@ import { getAuthors } from '../../redux/actions/authors/authors'
 import { Title } from '../../containers/Title/Title'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
-import {generateLink, routesConfiguration as routes} from '../../Router/routes'
+import { generateLink, routesConfiguration as routes } from '../../Router/routes'
+import { isAdmin } from '../../customHooks/isAdmin'
 
 const Authors = () => {
     const [searchValue, setSearchValue] = useState("")
@@ -25,9 +26,12 @@ const Authors = () => {
                 </div>
                 <div className="authorsHeaderSection">
                     <Link to={generateLink(routes.AUTHOR_CREATE)}>
-                        <Button variant="contained" color="primary">
-                            Add
-                        </Button>
+                        {
+                            isAdmin() &&
+                            <Button variant="contained" color="primary">
+                                Add
+                            </Button>
+                        }
                     </Link>
                     <SearchContainer
                         value={searchValue}
