@@ -32,9 +32,20 @@ const Header = ({forceUpdate}) => {
                     <div className="navbar">
                         {
                             isLoggedIn() &&
-                            <Link to={generateLink(routes.BOOKS)}>
-                                <span>Books</span>
-                            </Link>
+                            <>
+                                <Link to={generateLink(routes.PUBLISHERS)}>
+                                    <span>Publishers</span>
+                                </Link>
+                                <Link to={generateLink(routes.BOOKS)}>
+                                    <span>Books</span>
+                                </Link>
+                                <Link to={generateLink(routes.AUTHORS)}>
+                                    <span>Authors</span>
+                                </Link>
+                                <Link to={generateLink(routes.USERS)}>
+                                    <span>Users</span>
+                                </Link>
+                            </>
                         }
                     </div>
 

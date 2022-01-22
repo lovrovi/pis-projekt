@@ -9,7 +9,7 @@ import { login } from '../../redux/actions/auth/auth'
 import { generateLink, routesConfiguration as routes } from '../../Router/routes'
 import './Login.css'
 
-export const Login = (props) => {
+export const Login = ({ forceUpdate }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const message = useSelector(state => state.auth.message);
@@ -52,6 +52,7 @@ export const Login = (props) => {
                                     <p>{message ? message : ""}</p>
                                 </div>
                                 <Button
+                                    clickAction={forceUpdate}
                                     text="LOGIN"
                                 />
                             </Form>
