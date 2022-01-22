@@ -46,6 +46,7 @@ namespace LibraryAPI.Services
 
             var response = users.Select(x => new UsersResponse
             {
+                Id = x.Id,
                 UserName = x.UserName,
                 GroupType = x.GroupType
             });

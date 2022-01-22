@@ -37,6 +37,9 @@ const Header = () => {
                         <Link to={generateLink(routes.AUTHORS)}>
                             <span>Authors</span>
                         </Link>
+                        <Link to={generateLink(routes.USERS)}>
+                            <span>Users</span>
+                        </Link>
                     </div>
 
                     <Button 

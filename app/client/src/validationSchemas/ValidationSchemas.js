@@ -47,3 +47,14 @@ export const AuthorSchema = Yup.object().shape({
     birthdayDate: Yup.string().required('Birthday date is required'),
     email: Yup.string().required('Email is required').email('Must be a valid email'),
 });
+
+export const UserSchema = Yup.object().shape({
+    userName: Yup.string()
+        .required('Username is required'),
+    password: Yup.string()
+        .required('Password is required')
+        .min(5)
+        .max(30),
+    groupType: Yup.string()
+    .required('group type is required')
+});

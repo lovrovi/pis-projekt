@@ -8,6 +8,7 @@ import booksReducer from './redux/reducers/books/books'
 import publishersReducer from './redux/reducers/publishers/publishers'
 import authorsReducer from './redux/reducers/authors/authors'
 import authReducer from './redux/reducers/auth/auth'
+import userReducer from './redux/reducers/users/users'
 
 import {Provider} from 'react-redux'  
 import thunk from "redux-thunk";
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     books: booksReducer,
     publishers: publishersReducer,
     authors: authorsReducer,
-    auth: authReducer
+    auth: authReducer,
+    users: userReducer
 });
 
 const store = createStore(
