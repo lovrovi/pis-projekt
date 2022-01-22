@@ -8,6 +8,7 @@ import { AuthorsDetails } from '../components/Authors/AuthorsDetails'
 import { CreateBook } from '../components/Books/CreateBook'
 import { CreateAuthor } from '../components/Authors/CreateAuthor'
 import PrivateRoute from './PrivateRoute'
+import Users from '../components/Users/Users'
 
 const Router = () => {
     return (
@@ -20,6 +21,7 @@ const Router = () => {
                 <PrivateRoute path="/authors/create" component={CreateAuthor} />
                 <PrivateRoute path="/authors/:id" component={AuthorsDetails} />
                 <PrivateRoute path="/authors" component={Authors} />
+                <PrivateRoute path="/users" component={Users} />
             </Switch>
         </div>
     )

@@ -7,6 +7,7 @@ import Authors from '../components/Authors/Authors'
 import { AuthorsDetails } from '../components/Authors/AuthorsDetails'
 import { CreateAuthor } from '../components/Authors/CreateAuthor'
 import { Login } from "../components/Login/Login";
+import Users from "../components/Users/Users";
 
 export const routesConfiguration = {
     PUBLISHERS: {
@@ -43,6 +44,11 @@ export const routesConfiguration = {
         id: 'AUTHOR_DETAILS',
         path: '/authors/:id',
         Component: AuthorsDetails,
+    },
+    USERS: {
+        id: 'USERS',
+        path: '/users',
+        Component: Users,
     },
     LOGIN: {
         id: 'LOGIN',
