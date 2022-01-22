@@ -45,6 +45,9 @@ const Header = ({forceUpdate}) => {
                                 <Link to={generateLink(routes.USERS)}>
                                     <span>Users</span>
                                 </Link>
+                                <Link to={generateLink(routes.LOANS)}>
+                                    <span>Loans</span>
+                                </Link>
                             </>
                         }
                     </div>

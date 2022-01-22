@@ -9,6 +9,7 @@ import publishersReducer from './redux/reducers/publishers/publishers'
 import authorsReducer from './redux/reducers/authors/authors'
 import authReducer from './redux/reducers/auth/auth'
 import userReducer from './redux/reducers/users/users'
+import loanReducer from './redux/reducers/loans/loans'
 
 import {Provider} from 'react-redux'  
 import thunk from "redux-thunk";
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     publishers: publishersReducer,
     authors: authorsReducer,
     auth: authReducer,
-    users: userReducer
+    users: userReducer,
+    loans: loanReducer
 });
 
 const store = createStore(

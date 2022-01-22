@@ -8,6 +8,8 @@ import { AuthorsDetails } from '../components/Authors/AuthorsDetails'
 import { CreateAuthor } from '../components/Authors/CreateAuthor'
 import { Login } from "../components/Login/Login";
 import Users from "../components/Users/Users";
+import { CreateLoan } from "../components/Loans/CreateLoan";
+import Loans from "../components/Loans/Loans";
 
 export const routesConfiguration = {
     PUBLISHERS: {
@@ -49,6 +51,16 @@ export const routesConfiguration = {
         id: 'USERS',
         path: '/users',
         Component: Users,
+    },
+    LOANS: {
+        id: 'LOANS',
+        path: '/loans',
+        Component: Loans,
+    },
+    LOANS_CREATE: {
+        id: 'LOANS_CREATE',
+        path: '/loans/create',
+        Component: CreateLoan,
     },
     LOGIN: {
         id: 'LOGIN',

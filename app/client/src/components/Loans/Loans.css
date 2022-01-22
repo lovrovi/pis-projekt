@@ -1,0 +1,99 @@
+.loans{
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loansHeader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.loansHeaderTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.loansHeaderSection{
+    width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.loansTable{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.actionButtons{
+    display: flex;
+    justify-content: center;
+}
+
+.actionButton{
+    margin: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.actionButton:hover {
+    color: rgb(102, 102, 245);
+    cursor: pointer;
+}
+
+.loansLoading img{
+    width: 50px;
+    height: 50px;
+}
+
+.loansLoading{
+    margin-top: 50px;
+}
+
+.loansDetails{
+    display: flex;
+    flex-direction: row;
+    width: 1200px;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.detailsButtons{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.loanButton{
+    background-color: whitesmoke;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 20px;
+}
+
+.loanButton:hover{
+    cursor: pointer;
+    background-color: rgb(181, 192, 204);
+    color: white;
+}
+
+.booksContainer{
+    height: 50%;
+}
+
+.loansDetails form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}

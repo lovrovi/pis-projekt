@@ -22,6 +22,7 @@ const Router = () => {
                 <PrivateRoute path="/authors/:id" component={AuthorsDetails} />
                 <PrivateRoute path="/authors" component={Authors} />
                 <PrivateRoute path="/users" component={Users} />
+                <PrivateRoute path="/loans" component={Users} />
             </Switch>
         </div>
     )
