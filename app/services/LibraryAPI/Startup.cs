@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using LibraryAPI.Data;
 using LibraryAPI.Services;
+using LibraryAPI.Services.Interfaces;
 using LibraryAPI.Validations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -51,6 +52,7 @@ namespace LibraryAPI
             services.AddScoped<ICommentsService, CommentsService>();
             services.AddScoped<IReservationsService, ReservationsService>();
             services.AddScoped<ILoansService, LoansService>();
+            services.AddScoped<IUsersService, UsersService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -111,8 +113,6 @@ namespace LibraryAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LibraryAPI v1"));
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
