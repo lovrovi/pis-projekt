@@ -6,6 +6,8 @@ import Loading from '../../containers/Loading/Loading'
 import { Table } from '../../containers/Table/Table'
 import './Loans.css'
 import { DeleteLoanModal } from './DeleteLoadModal'
+import { isAdmin } from '../../customHooks/isAdmin'
+import { getUserId } from '../../customHooks/getUserId'
 //import { generateLink, routesConfiguration as routes } from '../../Router/routes'
 
 const LoansTable = () => {
@@ -17,7 +19,11 @@ const LoansTable = () => {
     const getLoansLoading = useSelector(state => state.loans.getLoansLoading)
 
     useEffect(() => {
-        dispatch(getLoans())
+        if(isAdmin()){
+            dispatch(getLoans())
+        } else {
+            dispatch(getLoans(getUserId))
+        }
     }, [//eslint-disable-line 
         dispatch])
 

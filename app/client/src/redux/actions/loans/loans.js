@@ -18,16 +18,16 @@ export const getLoansFail = () => {
     };
 };
 
-export const getLoans = (search = "") => {
+export const getLoans = (id = 0) => {
     return async (dispatch) => {
         // send request
         dispatch(getLoansStart());
-        search = encodeURIComponent(search);
+        id = encodeURIComponent(id);
         axios({
             method: "GET",
             url: "/loans",
             params: {
-                search
+                id
             },
         })
             .then((data) => {
@@ -143,14 +143,11 @@ export const createLoan = (loanObj) => {
     return async (dispatch) => {
         // send request
         dispatch(createLoanStart());
-        const loan = {
-            
-        }
 
         axios({
             method: "POST",
             url: "/loans",
-            data: loan
+            data: loanObj
         })
             .then((data) => {
                 console.log("createLoan:", data);
