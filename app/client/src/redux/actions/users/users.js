@@ -102,14 +102,9 @@ export const createUser = (userObj) => {
         // send request
         dispatch(createUserStart());
         const user = {
-            id: userObj.id,
-            name: userObj.name,
-            address: {
-                road: userObj.road,
-                zipCode: userObj.zipCode,
-                city: userObj.city,
-                country: userObj.country
-            }
+            userName: userObj.userName,
+            password: userObj.password,
+            groupType: userObj.groupType
         }
 
         axios({

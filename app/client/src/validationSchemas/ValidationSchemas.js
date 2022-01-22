@@ -49,10 +49,12 @@ export const AuthorSchema = Yup.object().shape({
 });
 
 export const UserSchema = Yup.object().shape({
-    name: Yup.string()
+    userName: Yup.string()
         .required('Username is required'),
-    road: Yup.string()
+    password: Yup.string()
         .required('Password is required')
         .min(5)
-        .max(30)
+        .max(30),
+    groupType: Yup.string()
+    .required('group type is required')
 });

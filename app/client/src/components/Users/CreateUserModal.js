@@ -17,8 +17,9 @@ export const CreateUserModal = ({ showModal, handleShowModal }) => {
     }
 
     const initialValues = {
-        username: "",
-        password: ""
+        userName: "",
+        password: "",
+        groupType: ""
     }
 
     return (
@@ -37,12 +38,16 @@ export const CreateUserModal = ({ showModal, handleShowModal }) => {
                         >
                             <Form>
                                 <InputField
-                                    name="surname"
-                                    label="Surname"
+                                    name="userName"
+                                    label="Username"
                                 />
                                 <InputField
                                     name="password"
                                     label="Password"
+                                />
+                                <InputField
+                                    name="groupType"
+                                    label="Group type"
                                 />
                                 <Button
                                     text="SAVE"

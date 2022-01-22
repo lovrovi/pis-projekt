@@ -43,7 +43,7 @@ const UsersTable = ({ value }) => {
                             clickDeleteIconAction={clickDeleteIconAction}
                         />
                         <DeleteUserModal 
-                            authorId={id} 
+                            userId={id} 
                             handleShowDeleteModal={handleShowDeleteModal}
                             showDeleteModal={showDeleteModal}
                         />

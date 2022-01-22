@@ -33,12 +33,6 @@ const Users = (props) => {
                             Add
                         </Button>
                     </div>
-                    <SearchContainer
-                        value={searchValue}
-                        name="searchValue"
-                        handleChange={onChange}
-                        searchAction={getUsers}
-                    />
                 </div>
             </div>
             <UsersTable
