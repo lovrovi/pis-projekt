@@ -4,6 +4,8 @@ namespace LibraryAPI.Response
 {
     public class LoanResponse
     {
+        public int Id { get; set; }
+
         public DateTime LoanDate { get; set; }
 
         public DateTime ReturnDate { get; set; }
@@ -12,6 +14,10 @@ namespace LibraryAPI.Response
 
         public int UserId { get; set; }
 
+        public string UserName { get; set; }
+
         public int BookId { get; set; }
+
+        public string BookTitle { get; set; }
     }
 }

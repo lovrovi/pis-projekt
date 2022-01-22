@@ -21,9 +21,9 @@ namespace LibraryAPI.Controllers
         // GET: api/loans
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult> GetLoans()
+        public async Task<ActionResult> GetLoans(int id)
         {
-            return Ok(await _loansService.GetLoans());
+            return Ok(await _loansService.GetLoans(id));
         }
 
         // GET: api/loans/1

@@ -59,15 +59,23 @@ namespace LibraryAPI.Services
             return response;
         }
 
-        public async Task<IEnumerable<LoanResponse>> GetLoans()
+        public async Task<IEnumerable<LoanResponse>> GetLoans(int id)
         {
-            var loan = await _context.Loans.ToListAsync();
+            var query = _context.Loans.Include(x => x.User).Include(x => x.Book).AsQueryable();
+
+            if (id != 0)
+            {
+                query = query.Where(x => x.UserId == id);
+            }
+            var loan = await query.ToListAsync();
             if (loan == null) return null;
 
             var response = loan.Select(x => new LoanResponse
             {
                 BookId = x.BookId,
+                BookTitle = x.Book.Title,
                 UserId = x.UserId,
+                UserName = x.User.UserName,
                 IsReturned = x.IsReturned,
                 LoanDate = x.LoanDate,
                 ReturnDate = x.ReturnDate
