@@ -10,6 +10,7 @@ import { BiEdit } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md'
 import _ from "lodash"
 import { isAdmin } from '../../customHooks/isAdmin';
+import {BiCommentDetail} from 'react-icons/bi'
 
 export const Table = (
     {
@@ -17,7 +18,8 @@ export const Table = (
         customTableData,
         customTableHeader,
         clickEditIconAction,
-        clickDeleteIconAction
+        clickDeleteIconAction,
+        clickCommentIconAction
     }) => {
     const classes = useTableStyles();
 
@@ -42,25 +44,32 @@ export const Table = (
                             return <StyledTableCell align="center" key={i}>{row[key]}</StyledTableCell>
                         })
                     }
-                    {
-                        isAdmin() &&
-                        <StyledTableCell align="center">
-                            <div className="actionButtons">
-                                <span
-                                    className="actionButton"
-                                    onClick={() => clickEditIconAction(row.id)}
-                                >
-                                    {clickEditIconAction ? <BiEdit size={22} /> : ""}
-                                </span>
+
+
+                    <StyledTableCell align="center">
+                        <div className="actionButtons">
+                            <span
+                                className="actionButton"
+                                onClick={() => isAdmin() ? clickEditIconAction(row.id) : clickCommentIconAction(row.id)}
+                            >
+                                {
+                                    isAdmin() !== true ? clickCommentIconAction ? <BiCommentDetail size={22} /> : "" : clickEditIconAction ? <BiEdit size={22} /> : ""
+                    
+                                }
+        
+                            </span>
+                            {
+                                isAdmin() &&
                                 <span
                                     className="actionButton"
                                     onClick={() => clickDeleteIconAction(row.id)}
                                 >
                                     {clickDeleteIconAction ? <MdDelete size={22} /> : ""}
                                 </span>
-                            </div>
-                        </StyledTableCell>
-                    }
+                            }
+                        </div>
+                    </StyledTableCell>
+
                 </StyledTableRow>
             )
         })
@@ -75,10 +84,9 @@ export const Table = (
                             generateCustomTableHeader() :
                             <>
                                 {generateTableHeader()}
-                                {
-                                    isAdmin() &&
-                                    <StyledTableCell align="center">Actions</StyledTableCell>
-                                }
+
+                                <StyledTableCell align="center">Actions</StyledTableCell>
+
                             </>
                     }
                 </TableRow>

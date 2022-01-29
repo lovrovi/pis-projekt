@@ -11,12 +11,14 @@ import PrivateRoute from './PrivateRoute'
 import Users from '../components/Users/Users'
 import Loans from '../components/Loans/Loans'
 import { CreateLoan } from '../components/Loans/CreateLoan'
+import { BooksComments } from '../components/Books/BooksComments'
 
 const Router = () => {
     return (
         <div>
             <Switch>
                 <PrivateRoute path="/publishers" component={Publishers} />
+                <PrivateRoute path="/books/comments/:id" component={BooksComments} />
                 <PrivateRoute path="/books/create" component={CreateBook} />
                 <PrivateRoute path="/books/:id" component={BooksDetails} />
                 <PrivateRoute path="/books" component={Books} />

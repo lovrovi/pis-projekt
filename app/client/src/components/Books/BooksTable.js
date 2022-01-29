@@ -29,6 +29,10 @@ const BooksTable = ({ searchValue }) => {
         history.push(generateLink(routes.BOOK_DETAILS, { id: id }))
     }
 
+    const clickCommentIconAction = (id) => {
+        history.push(generateLink(routes.BOOK_COMMENTS, { id: id }))
+    }
+
     const clickDeleteIconAction = (id) => {
         setId(id)
         handleShowDeleteModal()
@@ -46,6 +50,7 @@ const BooksTable = ({ searchValue }) => {
                             tableData={books}
                             clickEditIconAction={clickEditIconAction}
                             clickDeleteIconAction={clickDeleteIconAction}
+                            clickCommentIconAction={clickCommentIconAction}
                         />
                         
                         <DeleteBookModal

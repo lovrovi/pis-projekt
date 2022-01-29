@@ -10,6 +10,7 @@ import { Login } from "../components/Login/Login";
 import Users from "../components/Users/Users";
 import { CreateLoan } from "../components/Loans/CreateLoan";
 import Loans from "../components/Loans/Loans";
+import { BooksComments } from "../components/Books/BooksComments";
 
 export const routesConfiguration = {
     PUBLISHERS: {
@@ -66,6 +67,11 @@ export const routesConfiguration = {
         id: 'LOGIN',
         path: '/',
         Component: Login,
+    },
+    BOOK_COMMENTS: {
+        id: 'BOOK_COMMENTS',
+        path: '/books/comments/:id',
+        Component: BooksComments,
     }
 }
 
