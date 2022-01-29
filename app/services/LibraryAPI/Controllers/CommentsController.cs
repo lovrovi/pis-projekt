@@ -21,9 +21,11 @@ namespace LibraryAPI.Controllers
         // GET: api/comments
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult> GetComments()
+        public async Task<ActionResult> GetComments(int bookId)
         {
-            return Ok(await _commentsService.GetComments());
+            var userId = int.Parse(User.FindFirst("Id").Value);
+
+            return Ok(await _commentsService.GetComments(bookId, userId));
         }
 
         // GET: api/comments/1
