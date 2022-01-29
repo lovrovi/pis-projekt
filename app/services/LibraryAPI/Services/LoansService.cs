@@ -50,6 +50,7 @@ namespace LibraryAPI.Services
 
             var response = new LoanResponse
             {
+                Id = loan.Id,
                 BookId = loan.BookId,
                 UserId = loan.UserId,
                 IsReturned = loan.IsReturned,
@@ -72,6 +73,7 @@ namespace LibraryAPI.Services
 
             var response = loan.Select(x => new LoanResponse
             {
+                Id = x.Id,
                 BookId = x.BookId,
                 BookTitle = x.Book.Title,
                 UserId = x.UserId,

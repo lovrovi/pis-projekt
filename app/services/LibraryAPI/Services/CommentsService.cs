@@ -44,11 +44,12 @@ namespace LibraryAPI.Services
 
         public async Task<CommentResponse> GetComment(int id)
         {
-            var comment = await _context.Comments.FirstOrDefaultAsync(x => x.Id == id);
+            var comment = await _context.Comments.Include(x => x.User).FirstOrDefaultAsync(x => x.Id == id);
             if (comment == null) return null;
 
             var response = new CommentResponse
             {
+                UserName = comment.User.UserName,
                 BookId = comment.BookId,
                 UserId = comment.UserId,
                 Text = comment.Text
@@ -56,17 +57,32 @@ namespace LibraryAPI.Services
             return response;
         }
 
-        public async Task<IEnumerable<CommentResponse>> GetComments()
+        public async Task<CommentGetAllResponse> GetComments(int bookId, int userId)
         {
-            var comment = await _context.Comments.ToListAsync();
+            var comment = await _context.Comments.Include(x => x.User).Where(x => x.BookId == bookId).ToListAsync();
             if (comment == null) return null;
 
-            var response = comment.Select(x => new CommentResponse
+            var canComment = false;
+
+            if (_context.Loans.Any(x => x.BookId == bookId && x.UserId == userId))
             {
+                canComment = true;
+            }
+
+            var commentResponse = comment.Select(x => new CommentResponse
+            {
+                UserName = x.User.UserName,
                 BookId = x.BookId,
                 UserId = x.UserId,
                 Text = x.Text
             });
+
+            var response = new CommentGetAllResponse
+            {
+                CanComment = canComment,
+                Comments = commentResponse
+            };
+
             return response;
         }
     }

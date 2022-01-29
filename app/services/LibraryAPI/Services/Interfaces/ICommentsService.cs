@@ -7,7 +7,7 @@ namespace LibraryAPI.Services
 {
     public interface ICommentsService
     {
-        Task<IEnumerable<CommentResponse>> GetComments();
+        Task<CommentGetAllResponse> GetComments(int bookId, int userId);
         Task<CommentResponse> GetComment(int id);
         Task DeleteComment(int id);
         Task CreateComment(CommentRequest request);
