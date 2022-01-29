@@ -186,7 +186,70 @@ namespace LibraryAPI.Data
                    Price = 25.54f,
                    PublisherId = 2
                }
-           );
+            );
+
+            builder.Entity<Loan>().HasData(
+                new Loan
+                {
+                    Id = 1,
+                    UserId = 1,
+                    BookId = 1,
+                    LoanDate = new DateTime(2022, 1, 15),
+                    ReturnDate = new DateTime(2022, 2, 1),
+                    IsReturned = true,
+                },
+                new Loan
+                {
+                    Id = 2,
+                    UserId = 3,
+                    BookId = 2,
+                    LoanDate = new DateTime(2022, 1, 20),
+                    ReturnDate = new DateTime(2022, 2, 5),
+                    IsReturned = false,
+                },
+                new Loan
+                {
+                    Id = 3,
+                    UserId = 3,
+                    BookId = 3,
+                    LoanDate = new DateTime(2022, 1, 19),
+                    ReturnDate = new DateTime(2022, 2, 8),
+                    IsReturned = true,
+                },
+                new Loan
+                {
+                    Id = 4,
+                    UserId = 1,
+                    BookId = 2,
+                    LoanDate = new DateTime(2022, 1, 15),
+                    ReturnDate = new DateTime(2022, 2, 1),
+                    IsReturned = true,
+                }
+            );
+
+            builder.Entity<Comment>().HasData(
+                new Comment
+                {
+                    Id = 1,
+                    UserId = 1,
+                    BookId = 1,
+                    Text = "first comment",
+                },
+                new Comment
+                {
+                    Id = 2,
+                    UserId = 1,
+                    BookId = 2,
+                    Text = "first comment",
+                },
+                new Comment
+                {
+                    Id = 3,
+                    UserId = 3,
+                    BookId = 2,
+                    Text = "first comment",
+                }
+            );
 
             builder.Entity<AuthorBook>()
             .HasKey(ab => new { ab.AuthorId, ab.BookId });
