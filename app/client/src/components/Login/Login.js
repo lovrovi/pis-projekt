@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../redux/actions/auth/auth'
 import { generateLink, routesConfiguration as routes } from '../../Router/routes'
 import './Login.css'
+import { isAdmin } from '../../customHooks/isAdmin'
 
 export const Login = ({ forceUpdate }) => {
     const dispatch = useDispatch();
@@ -20,7 +21,9 @@ export const Login = ({ forceUpdate }) => {
     }
 
     const onLoginSuccess = () => {
-        history.push(generateLink(routes.PUBLISHERS))
+        isAdmin() ?
+        history.push(generateLink(routes.PUBLISHERS)) :
+        history.push(generateLink(routes.BOOKS))
     }
 
     const handleLogin = (values) => {

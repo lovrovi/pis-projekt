@@ -51,7 +51,7 @@ namespace LibraryAPI.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> CreateComment([FromForm] CommentRequest request)
+        public async Task<ActionResult> CreateComment([FromQuery] CommentRequest request)
         {
             var userId = int.Parse(User.FindFirst("Id").Value);
             request.UserId = userId;

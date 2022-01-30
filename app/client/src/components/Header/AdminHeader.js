@@ -48,6 +48,9 @@ const Header = ({forceUpdate}) => {
                                 <Link to={generateLink(routes.LOANS)}>
                                     <span>Loans</span>
                                 </Link>
+                                <Link to={generateLink(routes.RESERVATIONS)}>
+                                    <span>Reservations</span>
+                                </Link>
                                 <Link to={generateLink(routes.REGISTRATIONS)}>
                                     <span>Registrations</span>
                                 </Link>

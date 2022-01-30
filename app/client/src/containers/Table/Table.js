@@ -10,7 +10,8 @@ import { BiEdit } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md'
 import _ from "lodash"
 import { isAdmin } from '../../customHooks/isAdmin';
-import {BiCommentDetail} from 'react-icons/bi'
+import { BiCommentDetail } from 'react-icons/bi'
+import { AiTwotoneCalendar } from 'react-icons/ai'
 
 export const Table = (
     {
@@ -19,7 +20,8 @@ export const Table = (
         customTableHeader,
         clickEditIconAction,
         clickDeleteIconAction,
-        clickCommentIconAction
+        clickCommentIconAction,
+        clickReservationIconAction
     }) => {
     const classes = useTableStyles();
 
@@ -45,30 +47,41 @@ export const Table = (
                         })
                     }
 
-
-                    <StyledTableCell align="center">
-                        <div className="actionButtons">
-                            <span
-                                className="actionButton"
-                                onClick={() => isAdmin() ? clickEditIconAction(row.id) : clickCommentIconAction(row.id)}
-                            >
-                                {
-                                    isAdmin() !== true ? clickCommentIconAction ? <BiCommentDetail size={22} /> : "" : clickEditIconAction ? <BiEdit size={22} /> : ""
-                    
-                                }
-        
-                            </span>
-                            {
-                                isAdmin() &&
+                    {
+                        clickEditIconAction &&
+                        clickDeleteIconAction &&
+                        clickCommentIconAction &&
+                        clickReservationIconAction &&
+                        <StyledTableCell align="center">
+                            <div className="actionButtons">
                                 <span
                                     className="actionButton"
-                                    onClick={() => clickDeleteIconAction(row.id)}
+                                    onClick={() => isAdmin() ? clickEditIconAction(row.id) : clickCommentIconAction(row.id)}
                                 >
-                                    {clickDeleteIconAction ? <MdDelete size={22} /> : ""}
+                                    {
+                                        isAdmin() !== true ? clickCommentIconAction ? <BiCommentDetail size={22} /> : "" : clickEditIconAction ? <BiEdit size={22} /> : ""
+
+                                    }
+
                                 </span>
-                            }
-                        </div>
-                    </StyledTableCell>
+                                {
+                                    isAdmin() &&
+                                    <span
+                                        className="actionButton"
+                                        onClick={() => clickDeleteIconAction(row.id)}
+                                    >
+                                        {clickDeleteIconAction ? <MdDelete size={22} /> : ""}
+                                    </span>
+                                }
+                                <span
+                                    className="actionButton"
+                                    onClick={() => clickReservationIconAction(row.id)}
+                                >
+                                    {clickReservationIconAction ? <AiTwotoneCalendar size={22} /> : ""}
+                                </span>
+                            </div>
+                        </StyledTableCell>
+                    }
 
                 </StyledTableRow>
             )
@@ -85,7 +98,13 @@ export const Table = (
                             <>
                                 {generateTableHeader()}
 
-                                <StyledTableCell align="center">Actions</StyledTableCell>
+                                {
+                                    clickEditIconAction &&
+                                    clickDeleteIconAction &&
+                                    clickCommentIconAction &&
+                                    clickReservationIconAction &&
+                                    <StyledTableCell align="center">Actions</StyledTableCell>
+                                }
 
                             </>
                     }

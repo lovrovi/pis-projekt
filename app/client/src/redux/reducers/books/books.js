@@ -5,7 +5,9 @@ const initialState = {
   getBooksLoading: false,
   book: {},
   bookDetailsLoading: false,
-  putBookLoading: false
+  putBookLoading: false,
+  reservations: [],
+  getReservationsLoading: false
 };
 
 // books
@@ -86,6 +88,23 @@ const createBookFail = (state, action) => ({
   ...state
 });
 
+// reservations
+const getReservationsStart = (state, action) => ({
+  ...state,
+  getReservationsLoading: true
+});
+
+const getReservationsSuccess = (state, action) => ({
+  ...state,
+  reservations: [...action.reservations],
+  getReservationsLoading: false
+});
+
+const getReservationsFail = (state, action) => ({
+  ...state,
+  getReservationsLoading: false
+});
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionsTypes.GET_BOOKS_START:
@@ -118,6 +137,12 @@ const reducer = (state = initialState, action) => {
       return createBookSuccess(state, action);
     case actionsTypes.CREATE_BOOK_FAIL:
       return createBookFail(state, action);
+    case actionsTypes.GET_RESERVATIONS_START:
+      return getReservationsStart(state, action);
+    case actionsTypes.GET_RESERVATIONS_SUCCESS:
+      return getReservationsSuccess(state, action);
+    case actionsTypes.GET_RESERVATIONS_FAIL:
+      return getReservationsFail(state, action);
     default:
       return state;
   }

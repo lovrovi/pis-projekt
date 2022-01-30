@@ -220,3 +220,79 @@ export const createBook = (book, checkedAuthors) => {
             });
     };
 };
+
+export const createBookReservationStart = () => {
+    return {
+        type: actionsTypes.CREATE_BOOK_RESERVATION_START
+    };
+};
+export const createBookReservationSuccess = () => {
+    return {
+        type: actionsTypes.CREATE_BOOK_RESERVATION_SUCCESS,
+    };
+};
+export const createBookReservationFail = () => {
+    return {
+        type: actionsTypes.CREATE_BOOK_RESERVATION_FAIL
+    };
+};
+
+export const createBookReservation = (bookId, timeStamp) => {
+    return async (dispatch) => {
+        // send request
+        dispatch(createBookReservationStart());
+        axios({
+            method: "POST",
+            url: "/reservations",
+            params: {bookId, timeStamp}
+        })
+            .then((data) => {
+                console.log(data)
+                dispatch(createBookReservationSuccess());
+            })
+            .catch((e) => {
+                console.error(e)
+                dispatch(createBookReservationFail());
+            });
+    };
+};
+
+export const getReservationsStart = () => {
+    return {
+        type: actionsTypes.GET_RESERVATIONS_START
+    };
+};
+export const getReservationsSuccess = (reservations) => {
+    return {
+        type: actionsTypes.GET_RESERVATIONS_SUCCESS,
+        reservations
+    };
+};
+export const getReservationsFail = () => {
+    return {
+        type: actionsTypes.GET_RESERVATIONS_FAIL
+    };
+};
+
+export const getReservations = () => {
+    return async (dispatch) => {
+        // send request
+        dispatch(getReservationsStart());
+
+        axios({
+            method: "GET",
+            url: "/reservations",
+        })
+            .then((data) => {
+                console.log("getReservations:", data);
+                dispatch(getReservationsSuccess(data.data));
+
+            })
+            .catch((e) => {
+                console.error(e);
+                dispatch(getReservationsFail());
+            });
+    };
+};
+
+
