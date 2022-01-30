@@ -10,7 +10,8 @@ import { BiEdit } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md'
 import _ from "lodash"
 import { isAdmin } from '../../customHooks/isAdmin';
-import {BiCommentDetail} from 'react-icons/bi'
+import { BiCommentDetail } from 'react-icons/bi'
+import { AiTwotoneCalendar } from 'react-icons/ai'
 
 export const Table = (
     {
@@ -19,7 +20,8 @@ export const Table = (
         customTableHeader,
         clickEditIconAction,
         clickDeleteIconAction,
-        clickCommentIconAction
+        clickCommentIconAction,
+        clickReservationIconAction
     }) => {
     const classes = useTableStyles();
 
@@ -54,9 +56,9 @@ export const Table = (
                             >
                                 {
                                     isAdmin() !== true ? clickCommentIconAction ? <BiCommentDetail size={22} /> : "" : clickEditIconAction ? <BiEdit size={22} /> : ""
-                    
+
                                 }
-        
+
                             </span>
                             {
                                 isAdmin() &&
@@ -67,6 +69,12 @@ export const Table = (
                                     {clickDeleteIconAction ? <MdDelete size={22} /> : ""}
                                 </span>
                             }
+                            <span
+                                className="actionButton"
+                                onClick={() => clickReservationIconAction(row.id)}
+                            >
+                                {clickReservationIconAction ? <AiTwotoneCalendar size={22} /> : ""}
+                            </span>
                         </div>
                     </StyledTableCell>
 

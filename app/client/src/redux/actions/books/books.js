@@ -220,3 +220,41 @@ export const createBook = (book, checkedAuthors) => {
             });
     };
 };
+
+export const createBookReservationStart = () => {
+    return {
+        type: actionsTypes.CREATE_BOOK_RESERVATION_START
+    };
+};
+export const createBookReservationSuccess = () => {
+    return {
+        type: actionsTypes.CREATE_BOOK_RESERVATION_SUCCESS,
+    };
+};
+export const createBookReservationFail = () => {
+    return {
+        type: actionsTypes.CREATE_BOOK_RESERVATION_FAIL
+    };
+};
+
+export const createBookReservation = (bookId, timeStamp) => {
+    return async (dispatch) => {
+        // send request
+        dispatch(createBookReservationStart());
+        axios({
+            method: "POST",
+            url: "/reservations",
+            params: {bookId, timeStamp}
+        })
+            .then((data) => {
+                console.log(data)
+                dispatch(createBookReservationSuccess());
+            })
+            .catch((e) => {
+                console.error(e)
+                dispatch(createBookReservationFail());
+            });
+    };
+};
+
+

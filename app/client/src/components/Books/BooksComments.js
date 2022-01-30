@@ -1,21 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { Title } from '../../containers/Title/Title'
 import './Books.css'
-import Loading from '../../containers/Loading/Loading'
 import { getComments, createComment } from '../../redux/actions/comments/comments'
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import InputLabel from '@material-ui/core/InputLabel';
-import { Formik, Form } from 'formik';
-import { InputField } from '../../containers/InputField/InputField';
-import { getPublishers } from '../../redux/actions/publishers/publishers'
-import { Button } from '../../containers/Button/Button'
-import { BookUpdateSchema } from '../../validationSchemas/ValidationSchemas'
-import { Table } from '../../containers/Table/Table'
-import { generateLink, routesConfiguration as routes } from '../../Router/routes'
-import { ImageUpload } from '../../containers/ImageUpload/ImageUpload'
-import { ImageContainer } from '../../containers/ImageContainer/ImageContainer'
+
 
 export const BooksComments = (props) => {
     const dispatch = useDispatch()

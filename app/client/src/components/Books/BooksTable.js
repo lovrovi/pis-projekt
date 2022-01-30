@@ -7,12 +7,14 @@ import { Table } from '../../containers/Table/Table'
 import './Books.css'
 import { DeleteBookModal } from './DeleteBookModal'
 import { generateLink, routesConfiguration as routes } from '../../Router/routes'
+import { BookReservationModal } from './BookReservationModal'
 
 const BooksTable = ({ searchValue }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [id, setId] = useState("")
     const [showDeleteModal, setDeleteModalVisbility] = useState(false);
+    const [showReservationModal, setReservationModalVisbility] = useState(false);
     const books = useSelector(state => state.books.books)
     const getBooksLoading = useSelector(state => state.books.getBooksLoading)
 
@@ -23,6 +25,10 @@ const BooksTable = ({ searchValue }) => {
 
     const handleShowDeleteModal = () => {
         setDeleteModalVisbility(!showDeleteModal)
+    }
+
+    const handleShowReservationModal = () => {
+        setReservationModalVisbility(!showReservationModal)
     }
 
     const clickEditIconAction = (id) => {
@@ -38,6 +44,11 @@ const BooksTable = ({ searchValue }) => {
         handleShowDeleteModal()
     }
 
+    const clickReservationIconAction = (id) => {
+        setId(id)
+        handleShowReservationModal()
+    }
+
     return (
         <div className="booksTable">
             {
@@ -51,6 +62,13 @@ const BooksTable = ({ searchValue }) => {
                             clickEditIconAction={clickEditIconAction}
                             clickDeleteIconAction={clickDeleteIconAction}
                             clickCommentIconAction={clickCommentIconAction}
+                            clickReservationIconAction={clickReservationIconAction}
+                        />
+
+                        <BookReservationModal 
+                            bookId={id}
+                            handleShowReservationModal={handleShowReservationModal}
+                            showReservationModal={showReservationModal}
                         />
                         
                         <DeleteBookModal
