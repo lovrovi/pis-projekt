@@ -1,6 +1,5 @@
 import * as actionsTypes from "../actionsTypes"
 import axios from "../../../axios"
-import { useAppendUrl } from "../../../customHooks/useAppendUrl";
 
 export const getCommentsStart = () => {
     return {
@@ -36,6 +35,44 @@ export const getComments = (bookId) => {
             .catch((e) => {
                 console.error(e);
                 dispatch(getCommentsFail());
+            });
+    };
+};
+
+export const createCommentStart = () => {
+    return {
+        type: actionsTypes.CREATE_BOOK_COMMENT_START
+    };
+};
+export const createCommentSuccess = () => {
+    return {
+        type: actionsTypes.CREATE_BOOK_COMMENT_SUCCESS,
+    };
+};
+export const createCommentFail = () => {
+    return {
+        type: actionsTypes.CREATE_BOOK_COMMENT_FAIL
+    };
+};
+
+export const createComment = (bookId, text) => {
+    return async (dispatch) => {
+        // send request
+        dispatch(createCommentStart());
+        
+        axios({
+            method: "POST",
+            url: "/comments",
+            params: {bookId, text}
+        })
+            .then((data) => {
+                console.log(data)
+                dispatch(createCommentSuccess());
+                dispatch(getComments(bookId))
+            })
+            .catch((e) => {
+                console.error(e)
+                dispatch(createCommentFail());
             });
     };
 };
