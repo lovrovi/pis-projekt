@@ -42,9 +42,9 @@ namespace LibraryAPI.Controllers
         //PUT: api/loans/1
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateLoan(int id, [FromForm] bool request)
+        public async Task<ActionResult> UpdateLoan(int id)
         {
-            await _loansService.UpdateLoan(id, request);
+            await _loansService.UpdateLoan(id);
             return Ok();
         }
 
@@ -59,7 +59,7 @@ namespace LibraryAPI.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> CreateLoan([FromForm] LoanRequest request)
+        public async Task<ActionResult> CreateLoan([FromBody] LoanRequest request)
         {
             await _loansService.CreateLoan(request);
             return Ok();

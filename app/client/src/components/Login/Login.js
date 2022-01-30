@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useHistory } from 'react-router-dom'
 import { Form, Formik } from 'formik'
 import { InputField } from '../../containers/InputField/InputField'
@@ -14,6 +14,10 @@ export const Login = ({ forceUpdate }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const message = useSelector(state => state.auth.message);
+
+    useEffect(() => {
+      forceUpdate()
+    }, []);
 
     const initialValues = {
         username: "",

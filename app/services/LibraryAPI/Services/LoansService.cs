@@ -85,12 +85,12 @@ namespace LibraryAPI.Services
             return response;
         }
 
-        public async Task UpdateLoan(int id, bool request)
+        public async Task UpdateLoan(int id)
         {
             var loan = await _context.Loans.FirstOrDefaultAsync(x => x.Id == id);
             if (loan == null) return;
 
-            loan.IsReturned = request;
+            loan.IsReturned = true;
             await _context.SaveChangesAsync();
         }
     }

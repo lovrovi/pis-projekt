@@ -58,19 +58,15 @@ export const putLoanFail = () => {
     };
 };
 
-export const putLoan = (loanObj) => {
+export const putLoan = (id) => {
     return async (dispatch) => {
         // send request
-        const loan = {
-            
-        }
-
+        console.log(id)
         dispatch(putLoanStart());
 
         axios({
             method: "PUT",
-            url: `/loans/${loanObj.id}`,
-            data: loan
+            url: `/loans/${id}`,
         })
             .then((data) => {
                 console.log("putLoan:", data);
@@ -143,7 +139,7 @@ export const createLoan = (loanObj) => {
     return async (dispatch) => {
         // send request
         dispatch(createLoanStart());
-
+        
         axios({
             method: "POST",
             url: "/loans",

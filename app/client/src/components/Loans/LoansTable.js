@@ -8,6 +8,7 @@ import './Loans.css'
 import { DeleteLoanModal } from './DeleteLoadModal'
 import { isAdmin } from '../../customHooks/isAdmin'
 import { getUserId } from '../../customHooks/getUserId'
+import { putLoan } from '../../redux/actions/loans/loans'
 //import { generateLink, routesConfiguration as routes } from '../../Router/routes'
 
 const LoansTable = () => {
@@ -36,6 +37,23 @@ const LoansTable = () => {
         handleShowDeleteModal()
     }
 
+    const clickUpdateIconAction = (id) => {
+        setId(id)
+        dispatch(putLoan(id))
+    }
+
+    const loansRender = loans?.map(loan => {
+        const loanObj = {
+            id: loan.id,
+            loanDate: loan.loanDate,
+            returnDate: loan.returnDate,
+            userName: loan.userName,
+            bookTitle: loan.bookTitle,
+            returned: loan.isReturned.toString()
+        }
+        return loanObj
+    })
+
     return (
         <div className="loansTable">
             {
@@ -45,8 +63,9 @@ const LoansTable = () => {
                     </div> :
                     <>
                         <Table
-                            tableData={loans}
+                            tableData={loansRender}
                             clickDeleteIconAction={clickDeleteIconAction}
+                            clickUpdateIconAction={clickUpdateIconAction}
                         />
                         <DeleteLoanModal 
                             loanId={id} 

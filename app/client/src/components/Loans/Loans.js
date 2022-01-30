@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import LoansTable from './LoansTable'
 import './Loans.css'
-import { SearchContainer } from '../../containers/SearchContainer/SearchContainer'
 import { getLoans } from '../../redux/actions/loans/loans'
 import { CreateLoan } from '../../components/Loans/CreateLoan'
 import Button from '@material-ui/core/Button'

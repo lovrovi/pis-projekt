@@ -11,7 +11,7 @@ import { MdDelete } from 'react-icons/md'
 import _ from "lodash"
 import { isAdmin } from '../../customHooks/isAdmin';
 import { BiCommentDetail } from 'react-icons/bi'
-import { AiTwotoneCalendar } from 'react-icons/ai'
+import { AiTwotoneCalendar, AiFillCheckSquare } from 'react-icons/ai'
 
 export const Table = (
     {
@@ -21,7 +21,8 @@ export const Table = (
         clickEditIconAction,
         clickDeleteIconAction,
         clickCommentIconAction,
-        clickReservationIconAction
+        clickReservationIconAction,
+        clickUpdateIconAction
     }) => {
     const classes = useTableStyles();
 
@@ -48,10 +49,11 @@ export const Table = (
                     }
 
                     {
-                        clickEditIconAction &&
-                        clickDeleteIconAction &&
-                        clickCommentIconAction &&
-                        clickReservationIconAction &&
+                        (clickEditIconAction ||
+                        clickDeleteIconAction ||
+                        clickCommentIconAction ||
+                        clickReservationIconAction ||
+                        clickUpdateIconAction) &&
                         <StyledTableCell align="center">
                             <div className="actionButtons">
                                 <span
@@ -73,6 +75,12 @@ export const Table = (
                                         {clickDeleteIconAction ? <MdDelete size={22} /> : ""}
                                     </span>
                                 }
+                                <span
+                                    className="actionButton"
+                                    onClick={() => clickUpdateIconAction(row.id)}
+                                >
+                                    {clickUpdateIconAction ? <AiFillCheckSquare size={22} /> : ""}
+                                </span>
                                 <span
                                     className="actionButton"
                                     onClick={() => clickReservationIconAction(row.id)}
@@ -99,10 +107,10 @@ export const Table = (
                                 {generateTableHeader()}
 
                                 {
-                                    clickEditIconAction &&
-                                    clickDeleteIconAction &&
-                                    clickCommentIconAction &&
-                                    clickReservationIconAction &&
+                                    (clickEditIconAction ||
+                                    clickDeleteIconAction ||
+                                    clickCommentIconAction ||
+                                    clickReservationIconAction) &&
                                     <StyledTableCell align="center">Actions</StyledTableCell>
                                 }
 

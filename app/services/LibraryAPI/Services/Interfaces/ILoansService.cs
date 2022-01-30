@@ -9,7 +9,7 @@ namespace LibraryAPI.Services
     {
         Task<IEnumerable<LoanResponse>> GetLoans(int id);
         Task<LoanResponse> GetLoan(int id);
-        Task UpdateLoan(int id, bool request);
+        Task UpdateLoan(int id);
         Task DeleteLoan(int id);
         Task CreateLoan(LoanRequest request);
     }
