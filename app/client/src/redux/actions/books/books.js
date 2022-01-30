@@ -257,4 +257,42 @@ export const createBookReservation = (bookId, timeStamp) => {
     };
 };
 
+export const getReservationsStart = () => {
+    return {
+        type: actionsTypes.GET_RESERVATIONS_START
+    };
+};
+export const getReservationsSuccess = (reservations) => {
+    return {
+        type: actionsTypes.GET_RESERVATIONS_SUCCESS,
+        reservations
+    };
+};
+export const getReservationsFail = () => {
+    return {
+        type: actionsTypes.GET_RESERVATIONS_FAIL
+    };
+};
+
+export const getReservations = () => {
+    return async (dispatch) => {
+        // send request
+        dispatch(getReservationsStart());
+
+        axios({
+            method: "GET",
+            url: "/reservations",
+        })
+            .then((data) => {
+                console.log("getReservations:", data);
+                dispatch(getReservationsSuccess(data.data));
+
+            })
+            .catch((e) => {
+                console.error(e);
+                dispatch(getReservationsFail());
+            });
+    };
+};
+
 

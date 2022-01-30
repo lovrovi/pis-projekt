@@ -11,6 +11,7 @@ import Users from "../components/Users/Users";
 import { CreateLoan } from "../components/Loans/CreateLoan";
 import Loans from "../components/Loans/Loans";
 import { BooksComments } from "../components/Books/BooksComments";
+import Reservations from "../components/Reservations/Reservations";
 
 export const routesConfiguration = {
     PUBLISHERS: {
@@ -72,6 +73,11 @@ export const routesConfiguration = {
         id: 'BOOK_COMMENTS',
         path: '/books/comments/:id',
         Component: BooksComments,
+    },
+    RESERVATIONS: {
+        id: 'RESERVATIONS',
+        path: '/reservations',
+        Component: Reservations,
     }
 }
 

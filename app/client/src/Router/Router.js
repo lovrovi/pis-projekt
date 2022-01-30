@@ -12,6 +12,7 @@ import Users from '../components/Users/Users'
 import Loans from '../components/Loans/Loans'
 import { CreateLoan } from '../components/Loans/CreateLoan'
 import { BooksComments } from '../components/Books/BooksComments'
+import Reservations from '../components/Reservations/Reservations'
 
 const Router = () => {
     return (
@@ -22,6 +23,7 @@ const Router = () => {
                 <PrivateRoute path="/books/create" component={CreateBook} />
                 <PrivateRoute path="/books/:id" component={BooksDetails} />
                 <PrivateRoute path="/books" component={Books} />
+                <PrivateRoute path="/reservations" component={Reservations} />
                 <PrivateRoute path="/authors/create" component={CreateAuthor} />
                 <PrivateRoute path="/authors/:id" component={AuthorsDetails} />
                 <PrivateRoute path="/authors" component={Authors} />
