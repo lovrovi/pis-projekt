@@ -282,6 +282,7 @@ namespace LibraryAPI.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Loan> Loans { get; set; }
+        public DbSet<Registration> Registrations { get; set; }
 
     }
 }

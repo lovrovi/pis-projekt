@@ -5,63 +5,45 @@ import { InputField } from '../../containers/InputField/InputField'
 import { Button } from '../../containers/Button/Button'
 import { Title } from '../../containers/Title/Title'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../../redux/actions/auth/auth'
+import { register } from '../../redux/actions/auth/auth'
 import { generateLink, routesConfiguration as routes } from '../../Router/routes'
-import './Login.css'
+import './Register.css'
+import { RegisterSchema } from '../../validationSchemas/ValidationSchemas'
 
-export const Login = ({ forceUpdate }) => {
+export const Register = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const message = useSelector(state => state.auth.message);
 
     const initialValues = {
-        username: "",
-        password: ""
+        email: ""
     }
 
-    const onLoginSuccess = () => {
-        history.push(generateLink(routes.PUBLISHERS))
-    }
-
-    const handleLogin = (values) => {
-        dispatch(login(values, onLoginSuccess))
-    }
-
-    const handleRegister = () => {
-        history.push(generateLink(routes.REGISTER))
+    const handleRegister = (values) => {
+        dispatch(register(values))
     }
 
     return (
         <div>
             <>
-                <Title label="Login" />
-                <div className="login">
+                <Title label="Register" />
+                <div className="register">
                     {
                         <Formik
                             initialValues={initialValues}
-                            onSubmit={handleLogin}
+                            onSubmit={handleRegister}
+                            validationSchema={RegisterSchema}
                         >
                             <Form>
                                 <InputField
-                                    name="username"
-                                    label="User Name"
+                                    name="email"
+                                    label="Email"
                                     type="text"
-                                />
-                                <InputField
-                                    name="password"
-                                    label="Password"
-                                    type="password"
                                 />
                                 <div className="errorMessage">
                                     <p>{message ? message : ""}</p>
                                 </div>
                                 <Button
-                                    clickAction={forceUpdate}
-                                    text="LOGIN"
-                                />
-                                <br />
-                                <Button
-                                    clickAction={handleRegister}
                                     text="REGISTER"
                                 />
                             </Form>

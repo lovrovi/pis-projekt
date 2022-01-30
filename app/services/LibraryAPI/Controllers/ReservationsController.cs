@@ -51,6 +51,8 @@ namespace LibraryAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateReservation([FromForm] ReservationRequest request)
         {
+            request.UserId = int.Parse(User.FindFirst("Id").Value);
+
             await _reservationsService.CreateReservation(request);
             return Ok();
         }

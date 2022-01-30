@@ -8,6 +8,7 @@ import { Login } from './components/Login/Login'
 import { generateLink, routesConfiguration as routes } from './Router/routes'
 import { isLoggedIn } from './customHooks/isLoggedIn'
 import { isAdmin } from './customHooks/isAdmin'
+import { Register } from './components/Register/Register';
 
 function App() {
   const update = () => {
@@ -28,8 +29,13 @@ function App() {
         <Switch>
           <Route exact path="/" render={() => {
             return isLoggedIn() ?
-              (<Redirect to={generateLink(routes.PUBLISHERS)} />) :
+              (<Redirect to={generateLink(routes.BOOKS)} />) :
               (<Login forceUpdate={update} />)
+          }} />
+          <Route exact path="/register" render={() => {
+            return isLoggedIn() ?
+              (<Redirect to={generateLink(routes.BOOKS)} />) :
+              (<Register />)
           }} />
         </Switch>
         <Router />

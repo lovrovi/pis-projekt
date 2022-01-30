@@ -28,7 +28,25 @@ namespace LibraryAPI.Controllers
             {
                 return BadRequest();
             }
-            return Ok( new { token = token });
+            return Ok(new { token = token });
+        }
+
+        [HttpPost]
+        [Route("/api/Register")]
+        public async Task<ActionResult> RegisterUser([FromQuery] string email)
+        {
+            await _loginService.RegisterUser(email);
+            
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("/api/Register")]
+        public async Task<ActionResult> GetRegistrations()
+        {
+            var response = await _loginService.GetRegistrations();
+
+            return Ok(response);
         }
     }
 }

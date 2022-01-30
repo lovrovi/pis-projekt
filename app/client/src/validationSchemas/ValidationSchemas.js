@@ -58,3 +58,24 @@ export const UserSchema = Yup.object().shape({
     groupType: Yup.string()
     .required('group type is required')
 });
+
+const isSumEmail = (email) => {
+    let isValid = false
+    if(email.indexOf("@fsre.sum.ba", email.length - "@fsre.sum.ba".length) !== -1){
+        //VALID
+        isValid = true
+    }
+    return isValid
+}
+
+
+export const RegisterSchema = Yup.object().shape({
+    email: Yup.string()
+        .required('Username is required')
+        .email('Must be a valid email address')
+        .test(
+            "test-summail",
+            "Must be a valid SUM email",
+            (value) => isSumEmail(value) === true
+        )
+});

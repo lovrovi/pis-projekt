@@ -12,6 +12,7 @@ import Users from '../components/Users/Users'
 import Loans from '../components/Loans/Loans'
 import { CreateLoan } from '../components/Loans/CreateLoan'
 import { BooksComments } from '../components/Books/BooksComments'
+import { Registrations } from '../components/Registrations/Registrations'
 
 const Router = () => {
     return (
@@ -28,6 +29,7 @@ const Router = () => {
                 <PrivateRoute path="/users" component={Users} />
                 <PrivateRoute path="/loans/create" component={CreateLoan} />
                 <PrivateRoute path="/loans" component={Loans} />
+                <PrivateRoute path="/registrations" component={Registrations} />
             </Switch>
         </div>
     )

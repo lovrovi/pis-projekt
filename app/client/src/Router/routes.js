@@ -11,6 +11,8 @@ import Users from "../components/Users/Users";
 import { CreateLoan } from "../components/Loans/CreateLoan";
 import Loans from "../components/Loans/Loans";
 import { BooksComments } from "../components/Books/BooksComments";
+import { Register } from "../components/Register/Register";
+import { Registrations } from "../components/Registrations/Registrations";
 
 export const routesConfiguration = {
     PUBLISHERS: {
@@ -72,6 +74,16 @@ export const routesConfiguration = {
         id: 'BOOK_COMMENTS',
         path: '/books/comments/:id',
         Component: BooksComments,
+    },
+    REGISTER: {
+        id: 'REGISTER',
+        path: '/register',
+        Component: Register,
+    },
+    REGISTRATIONS: {
+        id: 'REGISTRATIONS',
+        path: '/registrations',
+        Component: Registrations,
     }
 }
 

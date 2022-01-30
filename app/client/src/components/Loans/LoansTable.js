@@ -22,7 +22,7 @@ const LoansTable = () => {
         if(isAdmin()){
             dispatch(getLoans())
         } else {
-            dispatch(getLoans(getUserId))
+            dispatch(getLoans(getUserId()))
         }
     }, [//eslint-disable-line 
         dispatch])

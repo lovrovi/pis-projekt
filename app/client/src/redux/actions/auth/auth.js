@@ -54,3 +54,78 @@ export const handleLogout = () => {
         localStorage.removeItem('token')
     }
 }
+
+export const registerStart = () => {
+    return {
+        type: actionsTypes.REGISTER_START
+    };
+};
+export const registerSuccess = () => {
+    return {
+        type: actionsTypes.REGISTER_SUCCESS
+    };
+};
+export const registerFail = (message) => {
+    return {
+        type: actionsTypes.REGISTER_FAIL,
+        message
+    };
+};
+
+export const register = (email) => {
+    return async (dispatch) => {
+        // send request
+        dispatch(registerStart());
+
+        axios({
+            method: "POST",
+            url: "/register",
+            params: email
+        })
+            .then((data) => {
+                console.log("register:", data);
+                dispatch(registerSuccess());
+            })
+            .catch((e) => {
+                console.error(e);
+                dispatch(registerFail("Incorrect register credentials"));
+            });
+    };
+};
+
+export const getRegistrationsStart = () => {
+    return {
+        type: actionsTypes.GET_REGISTRATIONS_START
+    };
+};
+export const getRegistrationsSuccess = (registrations) => {
+    return {
+        type: actionsTypes.GET_REGISTRATIONS_SUCCESS,
+        registrations
+    };
+};
+export const getRegistrationsFail = () => {
+    return {
+        type: actionsTypes.GET_REGISTRATIONS_FAIL,
+    };
+};
+
+export const getRegistrations = () => {
+    return async (dispatch) => {
+        // send request
+        dispatch(getRegistrationsStart());
+
+        axios({
+            method: "GET",
+            url: "/register",
+        })
+            .then((data) => {
+                console.log("register:", data);
+                dispatch(getRegistrationsSuccess(data.data));
+            })
+            .catch((e) => {
+                console.error(e);
+                dispatch(getRegistrationsFail());
+            });
+    };
+};

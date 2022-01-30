@@ -1,10 +1,14 @@
 ﻿using LibraryAPI.Data;
+using LibraryAPI.Models;
 using LibraryAPI.Models.Enums;
+using LibraryAPI.Response;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +56,32 @@ namespace LibraryAPI.Services
             var tokenString = GenerateJSONWebToken(user.UserName, user.Id, user.GroupType);
 
             return tokenString;
+        }
+
+        public async Task RegisterUser(string email)
+        {
+            var registration = new Registration { 
+                Email = email, 
+                SubmissionDate = DateTime.Now 
+            };
+
+            await _context.Registrations.AddAsync(registration);
+            await _context.SaveChangesAsync();
+            return;
+        }
+
+        public async Task<IEnumerable<RegistrationResponse>> GetRegistrations()
+        {
+            var registrations = await _context.Registrations
+                .Select(x => new RegistrationResponse
+                {
+                    Email = x.Email,
+                    SubmissionDate = x.SubmissionDate
+                })
+                .OrderBy(x => x.SubmissionDate)
+                .ToListAsync();
+
+            return registrations;
         }
     }
 }
