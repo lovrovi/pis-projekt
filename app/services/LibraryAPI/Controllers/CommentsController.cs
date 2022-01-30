@@ -21,7 +21,7 @@ namespace LibraryAPI.Controllers
         // GET: api/comments
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult> GetComments(int bookId)
+        public async Task<ActionResult> GetComments([FromQuery] int bookId)
         {
             var userId = int.Parse(User.FindFirst("Id").Value);
 
@@ -53,6 +53,9 @@ namespace LibraryAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateComment([FromForm] CommentRequest request)
         {
+            var userId = int.Parse(User.FindFirst("Id").Value);
+            request.UserId = userId;
+
             await _commentsService.CreateComment(request);
             return Ok();
         }

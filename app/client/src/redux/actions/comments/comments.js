@@ -19,7 +19,7 @@ export const getCommentsFail = () => {
     };
 };
 
-export const getComments = (id) => {
+export const getComments = (bookId) => {
     return async (dispatch) => {
         // send request
         dispatch(getCommentsStart());
@@ -27,7 +27,7 @@ export const getComments = (id) => {
         axios({
             method: "GET",
             url: `/comments`,
-            data: id
+            params: {bookId}
         })
             .then((data) => {
                 console.log(data)
