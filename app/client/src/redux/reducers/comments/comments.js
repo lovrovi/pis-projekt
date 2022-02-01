@@ -3,6 +3,7 @@ import * as actionsTypes from "../../actions/actionsTypes";
 const initialState = {
   comments: [],
   getCommentsLoading: false,
+  canComment: false,
 };
 
 // comments
@@ -14,7 +15,8 @@ const getCommentsStart = (state, action) => ({
 const getCommentsSuccess = (state, action) => ({
   ...state,
   comments: [...action.comments],
-  getBooksLoading: false
+  getCommentsLoading: false,
+  canComment: action.canComment
 });
 
 const getCommentsFail = (state, action) => ({

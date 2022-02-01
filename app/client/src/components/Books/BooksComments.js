@@ -12,6 +12,7 @@ export const BooksComments = (props) => {
     const [bookId, setBookId] = useState("")
     const [commentText, setCommentText] = useState("")
     const comments = useSelector(state => state.comments.comments)
+    const canComment = useSelector(state => state.comments.canComment)
 
     useEffect(() => {
         const { id } = props.match.params
@@ -31,31 +32,33 @@ export const BooksComments = (props) => {
         e.preventDefault()
         dispatch(createComment(bookId, commentText))
     }
-
+    console.log(canComment)
     return (
         <div className='booksComments'>
             <Title label="Comments" />
             <div className='createComment'>
-                <form onSubmit={onReviewSend}>
-                    <div className="ad-details-review">
-                        <div className="review-title">
-                            <span>Review</span>
+                {canComment && (
+                    <form onSubmit={onReviewSend}>
+                        <div className="ad-details-review">
+                            <div className="review-title">
+                                <span>Review</span>
+                            </div>
+                            <div className="comment">
+                                <InputLabel id="comment">Comment</InputLabel>
+                                <TextareaAutosize
+                                    name="comment"
+                                    value={commentText}
+                                    onChange={(e) => setCommentText(e.target.value)}
+                                    aria-label="minimum height"
+                                    minRows={5}
+                                    placeholder=""
+                                />
+                            </div>
+                            
+                            <button>Submit</button>
                         </div>
-                        <div className="comment">
-                            <InputLabel id="comment">Comment</InputLabel>
-                            <TextareaAutosize
-                                name="comment"
-                                value={commentText}
-                                onChange={(e) => setCommentText(e.target.value)}
-                                aria-label="minimum height"
-                                minRows={5}
-                                placeholder=""
-                            />
-                        </div>
-                        
-                        <button>Submit</button>
-                    </div>
-                </form>
+                    </form>
+                )}
             </div>
             <div className='comments'>
                 {commentsRender}

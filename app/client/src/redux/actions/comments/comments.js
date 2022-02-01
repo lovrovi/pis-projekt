@@ -6,10 +6,11 @@ export const getCommentsStart = () => {
         type: actionsTypes.GET_BOOK_COMMENTS_START
     };
 };
-export const getCommentsSuccess = (comments) => {
+export const getCommentsSuccess = (comments, canComment) => {
     return {
         type: actionsTypes.GET_BOOK_COMMENTS_SUCCESS,
-        comments
+        comments,
+        canComment
     };
 };
 export const getCommentsFail = () => {
@@ -30,7 +31,7 @@ export const getComments = (bookId) => {
         })
             .then((data) => {
                 console.log(data)
-                dispatch(getCommentsSuccess(data.data.comments));
+                dispatch(getCommentsSuccess(data.data.comments, data.data.canComment));
             })
             .catch((e) => {
                 console.error(e);
