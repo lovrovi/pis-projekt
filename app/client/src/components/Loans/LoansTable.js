@@ -62,11 +62,18 @@ const LoansTable = () => {
                         <Loading />
                     </div> :
                     <>
-                        <Table
-                            tableData={loansRender}
-                            clickDeleteIconAction={clickDeleteIconAction}
-                            clickUpdateIconAction={clickUpdateIconAction}
-                        />
+                        {
+                            isAdmin() ?
+                                <Table
+                                    tableData={loansRender}
+                                    clickDeleteIconAction={clickDeleteIconAction}
+                                    clickUpdateIconAction={clickUpdateIconAction}
+                                />
+                            :
+                                <Table
+                                    tableData={loansRender}
+                                />
+                        }
                         <DeleteLoanModal 
                             loanId={id} 
                             handleShowDeleteModal={handleShowDeleteModal}

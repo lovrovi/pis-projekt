@@ -15,8 +15,8 @@ const ReservationsTable = () => {
 
     const reservationsRender = reservations?.map(reservation => {
         const reservationObj = {
-            bookId: reservation.bookId,
-            userId: reservation.userId,
+            bookTitle: reservation.bookTitle,
+            userName: reservation.userName,
             timeStamp: reservation.timeStamp
         }
         return reservationObj

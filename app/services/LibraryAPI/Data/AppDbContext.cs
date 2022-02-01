@@ -104,7 +104,7 @@ namespace LibraryAPI.Data
                 new
                 {
                     PublisherId = 1,
-                    Road = "ulicaaaaaaaaa",
+                    Road = "ulica",
                     ZipCode = "88000",
                     City = "Mostar",
                     Country = "BiH"
@@ -112,7 +112,7 @@ namespace LibraryAPI.Data
                 new
                 {
                     PublisherId = 2,
-                    Road = "splitskaaaaa",
+                    Road = "splitska",
                     ZipCode = "80012",
                     City = "Split",
                     Country = "HR"
@@ -120,7 +120,7 @@ namespace LibraryAPI.Data
                 new
                 {
                     PublisherId = 3,
-                    Road = "sarajevssssssska",
+                    Road = "sarajevska",
                     ZipCode = "70005",
                     City = "Sarajevo",
                     Country = "BiH"
@@ -128,7 +128,7 @@ namespace LibraryAPI.Data
                 new
                 {
                     PublisherId = 4,
-                    Road = "splitsssska",
+                    Road = "splitska",
                     ZipCode = "80077",
                     City = "Split",
                     Country = "HR"
@@ -248,6 +248,36 @@ namespace LibraryAPI.Data
                     UserId = 3,
                     BookId = 2,
                     Text = "first comment",
+                }
+            );
+
+            builder.Entity<Reservation>().HasData(
+                new Reservation
+                {
+                    Id = 1,
+                    BookId = 1,
+                    UserId = 1
+                }, 
+                new Reservation
+                {
+                    Id = 2,
+                    BookId = 3,
+                    UserId = 2
+                },
+                new Reservation
+                {
+                    Id = 3,
+                    BookId = 2,
+                    UserId = 3
+                }
+            );
+
+            builder.Entity<Registration>().HasData(
+                new Registration
+                {
+                    Id = 1,
+                    Email = "imeprezime@fsre.sum.ba",
+                    SubmissionDate = new DateTime(2022, 1, 1)
                 }
             );
 

@@ -14,7 +14,7 @@ function App() {
   const update = () => {
     setTimeout(() => {
       forceUpdate()
-    }, 500)
+    }, 1000)
   }
   const forceUpdate = React.useReducer(() => ({}))[1]
 
@@ -25,7 +25,7 @@ function App() {
           <AdminHeader forceUpdate={forceUpdate} /> :
           <Header forceUpdate={forceUpdate}/>
       }
-      <div className="layout">
+      <div className="layout" onClick={update}>
         <Switch>
           <Route exact path="/" render={() => {
             return isLoggedIn() ?

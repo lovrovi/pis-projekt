@@ -26,19 +26,6 @@ namespace LibraryAPI.Controllers
             return Ok(await _reservationsService.GetReservations());
         }
 
-        // GET: api/reservations/1
-        [Authorize]
-        [HttpGet("{id}")]
-        public async Task<ActionResult> GetReservation(int id)
-        {
-            var response = await _reservationsService.GetReservation(id);
-            if (response == null)
-            {
-                return NotFound();
-            }
-            return Ok(response);
-        }
-
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteReservation(int id)

@@ -68,12 +68,12 @@ export const Table = (
                                 </span>
                                 {
                                     isAdmin() &&
-                                    <span
+                                    (<span
                                         className="actionButton"
                                         onClick={() => clickDeleteIconAction(row.id)}
                                     >
                                         {clickDeleteIconAction ? <MdDelete size={22} /> : ""}
-                                    </span>
+                                    </span>)
                                 }
                                 <span
                                     className="actionButton"

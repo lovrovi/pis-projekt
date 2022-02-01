@@ -42,29 +42,18 @@ namespace LibraryAPI.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ReservationResponse> GetReservation(int id)
-        {
-            var reservation = await _context.Reservations.FirstOrDefaultAsync(x => x.Id == id);
-            if (reservation == null) return null;
-
-            var response = new ReservationResponse
-            {
-                BookId = reservation.BookId,
-                UserId = reservation.UserId,
-                TimeStamp = reservation.TimeStamp
-            };
-            return response;
-        }
-
         public async Task<IEnumerable<ReservationResponse>> GetReservations()
         {
-            var reservation = await _context.Reservations.ToListAsync();
+            var reservation = await _context.Reservations
+                .Include(x => x.User)
+                .Include(x => x.Book)
+                .ToListAsync();
             if (reservation == null) return null;
 
             var response = reservation.Select(x => new ReservationResponse
             {
-                BookId = x.BookId,
-                UserId = x.UserId,
+                BookTitle = x.Book.Title,
+                UserName = x.User.UserName,
                 TimeStamp = x.TimeStamp
             });
             return response;
