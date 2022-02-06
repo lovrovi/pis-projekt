@@ -12,5 +12,7 @@ namespace LibraryAPI.Models
         public int PublisherId { get; set; }
         public Publisher Publisher { get; set; }
         public IEnumerable<AuthorBook> AuthorBook { get; set; }
+        public string ISBN { get; set; }
+        public IEnumerable<BookCategory> BookCategory { get; set; }
     }
 }

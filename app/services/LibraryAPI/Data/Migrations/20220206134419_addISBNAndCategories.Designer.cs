@@ -3,15 +3,17 @@ using System;
 using LibraryAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LibraryAPI.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220206134419_addISBNAndCategories")]
+    partial class addISBNAndCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +54,7 @@ namespace LibraryAPI.Data.Migrations
                             Biography = "ovo je biografija",
                             BirthdayDate = new DateTime(2011, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "email@gmail.com",
-                            Image = "placeholder.png",
+                            Image = "http://slika.jpeg",
                             Name = "Marko"
                         },
                         new
@@ -61,7 +63,7 @@ namespace LibraryAPI.Data.Migrations
                             Biography = "ovo je biografija",
                             BirthdayDate = new DateTime(2018, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "example@gmail.com",
-                            Image = "placeholder.png",
+                            Image = "http://slika.jpeg",
                             Name = "Ivan"
                         },
                         new
@@ -70,7 +72,7 @@ namespace LibraryAPI.Data.Migrations
                             Biography = "ovo je biografija",
                             BirthdayDate = new DateTime(2015, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mail@gmail.com",
-                            Image = "placeholder.png",
+                            Image = "http://slika.jpeg",
                             Name = "Filip"
                         },
                         new
@@ -79,7 +81,7 @@ namespace LibraryAPI.Data.Migrations
                             Biography = "ovo je biografija",
                             BirthdayDate = new DateTime(1990, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tin@gmail.com",
-                            Image = "placeholder.png",
+                            Image = "http://slika.jpeg",
                             Name = "Tin"
                         });
                 });
@@ -171,7 +173,7 @@ namespace LibraryAPI.Data.Migrations
                             Id = 1,
                             Description = "ovo je opisssssss",
                             ISBN = "978-3-16-148410-0",
-                            Image = "placeholder.png",
+                            Image = "http://slika.jpeg",
                             Pages = 100,
                             Price = 55.24f,
                             PublisherId = 1,
@@ -182,7 +184,7 @@ namespace LibraryAPI.Data.Migrations
                             Id = 2,
                             Description = "ovo je opissssssssss",
                             ISBN = "978-3-16-148410-1",
-                            Image = "placeholder.png",
+                            Image = "http://slika.jpeg",
                             Pages = 180,
                             Price = 87.54f,
                             PublisherId = 3,
@@ -193,7 +195,7 @@ namespace LibraryAPI.Data.Migrations
                             Id = 3,
                             Description = "ovo je opisddsdsdss",
                             ISBN = "978-3-16-148410-2",
-                            Image = "placeholder.png",
+                            Image = "http://slika.jpeg",
                             Pages = 120,
                             Price = 65.84f,
                             PublisherId = 4,
@@ -204,7 +206,7 @@ namespace LibraryAPI.Data.Migrations
                             Id = 4,
                             Description = "ovo je opisdsdsdsdss",
                             ISBN = "978-3-16-148410-3",
-                            Image = "placeholder.png",
+                            Image = "http://slika.jpeg",
                             Pages = 150,
                             Price = 50.14f,
                             PublisherId = 2,
@@ -215,7 +217,7 @@ namespace LibraryAPI.Data.Migrations
                             Id = 5,
                             Description = "dssdsdsdsadsadsads",
                             ISBN = "978-3-16-148410-4",
-                            Image = "placeholder.png",
+                            Image = "http://slika.jpeg",
                             Pages = 110,
                             Price = 25.54f,
                             PublisherId = 2,

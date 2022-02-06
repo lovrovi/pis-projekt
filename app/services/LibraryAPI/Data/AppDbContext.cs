@@ -43,7 +43,7 @@ namespace LibraryAPI.Data
                {
                    Id = 1,
                    Name = "Marko",
-                   Image = "http://slika.jpeg",
+                   Image = "placeholder.png",
                    Biography = "ovo je biografija",
                    BirthdayDate = new DateTime(2011, 6, 10),
                    Email = "email@gmail.com"
@@ -52,7 +52,7 @@ namespace LibraryAPI.Data
                {
                    Id = 2,
                    Name = "Ivan",
-                   Image = "http://slika.jpeg",
+                   Image = "placeholder.png",
                    Biography = "ovo je biografija",
                    BirthdayDate = new DateTime(2018, 6, 10),
                    Email = "example@gmail.com"
@@ -61,7 +61,7 @@ namespace LibraryAPI.Data
                {
                    Id = 3,
                    Name = "Filip",
-                   Image = "http://slika.jpeg",
+                   Image = "placeholder.png",
                    Biography = "ovo je biografija",
                    BirthdayDate = new DateTime(2015, 6, 10),
                    Email = "mail@gmail.com"
@@ -70,7 +70,7 @@ namespace LibraryAPI.Data
                {
                    Id = 4,
                    Name = "Tin",
-                   Image = "http://slika.jpeg",
+                   Image = "placeholder.png",
                    Biography = "ovo je biografija",
                    BirthdayDate = new DateTime(1990, 6, 10),
                    Email = "tin@gmail.com"
@@ -104,7 +104,7 @@ namespace LibraryAPI.Data
                 new
                 {
                     PublisherId = 1,
-                    Road = "ulica",
+                    Road = "ulica bez imena",
                     ZipCode = "88000",
                     City = "Mostar",
                     Country = "BiH"
@@ -112,7 +112,7 @@ namespace LibraryAPI.Data
                 new
                 {
                     PublisherId = 2,
-                    Road = "splitska",
+                    Road = "splitska ulica",
                     ZipCode = "80012",
                     City = "Split",
                     Country = "HR"
@@ -120,7 +120,7 @@ namespace LibraryAPI.Data
                 new
                 {
                     PublisherId = 3,
-                    Road = "sarajevska",
+                    Road = "sarajevska ulica",
                     ZipCode = "70005",
                     City = "Sarajevo",
                     Country = "BiH"
@@ -128,7 +128,7 @@ namespace LibraryAPI.Data
                 new
                 {
                     PublisherId = 4,
-                    Road = "splitska",
+                    Road = "zagrebacka ulica",
                     ZipCode = "80077",
                     City = "Split",
                     Country = "HR"
@@ -140,51 +140,56 @@ namespace LibraryAPI.Data
                {
                    Id = 1,
                    Title = "knjiga1",
-                   Image = "http://slika.jpeg",
+                   Image = "placeholder.png",
                    Description = "ovo je opisssssss",
                    Pages = 100,
                    Price = 55.24f,
-                   PublisherId = 1
+                   PublisherId = 1,
+                   ISBN = "978-3-16-148410-0"
                },
                new Book
                {
                    Id = 2,
                    Title = "knjiga2",
-                   Image = "http://slika.jpeg",
+                   Image = "placeholder.png",
                    Description = "ovo je opissssssssss",
                    Pages = 180,
                    Price = 87.54f,
-                   PublisherId = 3
+                   PublisherId = 3,
+                   ISBN = "978-3-16-148410-1"
                },
                new Book
                {
                    Id = 3,
                    Title = "knjiga3",
-                   Image = "http://slika.jpeg",
+                   Image = "placeholder.png",
                    Description = "ovo je opisddsdsdss",
                    Pages = 120,
                    Price = 65.84f,
-                   PublisherId = 4
+                   PublisherId = 4,
+                   ISBN = "978-3-16-148410-2"
                },
                new Book
                {
                    Id = 4,
                    Title = "knjiga4",
-                   Image = "http://slika.jpeg",
+                   Image = "placeholder.png",
                    Description = "ovo je opisdsdsdsdss",
                    Pages = 150,
                    Price = 50.14f,
-                   PublisherId = 2
+                   PublisherId = 2,
+                   ISBN = "978-3-16-148410-3"
                },
                new Book
                {
                    Id = 5,
                    Title = "knjiga5",
-                   Image = "http://slika.jpeg",
+                   Image = "placeholder.png",
                    Description = "dssdsdsdsadsadsads",
                    Pages = 110,
                    Price = 25.54f,
-                   PublisherId = 2
+                   PublisherId = 2,
+                   ISBN = "978-3-16-148410-4"
                }
             );
 
@@ -257,7 +262,7 @@ namespace LibraryAPI.Data
                     Id = 1,
                     BookId = 1,
                     UserId = 1
-                }, 
+                },
                 new Reservation
                 {
                     Id = 2,
@@ -302,6 +307,38 @@ namespace LibraryAPI.Data
                 new AuthorBook { BookId = 2, AuthorId = 1 },
                 new AuthorBook { BookId = 3, AuthorId = 2 }
             );
+
+            builder.Entity<BookCategory>()
+            .HasKey(x => new { x.CategoryId, x.BookId });
+
+            builder.Entity<BookCategory>()
+                .HasOne(bc => bc.Book)
+                .WithMany(b => b.BookCategory)
+                .HasForeignKey(bc => bc.BookId);
+
+            builder.Entity<BookCategory>()
+                .HasOne(bc => bc.Category)
+                .WithMany(c => c.BookCategory)
+                .HasForeignKey(bc => bc.CategoryId);
+
+            builder.Entity<Category>().HasData(
+                new Category { Id = 1, Name = "Science" },
+                new Category { Id = 2, Name = "Philosophy" },
+                new Category { Id = 3, Name = "Computer science" },
+                new Category { Id = 4, Name = "Sport" },
+                new Category { Id = 5, Name = "History"}
+            );
+
+            builder.Entity<BookCategory>().HasData(
+                new BookCategory { BookId = 1, CategoryId = 1 },
+                new BookCategory { BookId = 1, CategoryId = 2 },
+                new BookCategory { BookId = 2, CategoryId = 3 },
+                new BookCategory { BookId = 3, CategoryId = 2 },
+                new BookCategory { BookId = 3, CategoryId = 4 },
+                new BookCategory { BookId = 3, CategoryId = 5 },
+                new BookCategory { BookId = 4, CategoryId = 4 },
+                new BookCategory { BookId = 5, CategoryId = 3 }
+            );
         }
 
         public DbSet<Book> Books { get; set; }
@@ -313,6 +350,8 @@ namespace LibraryAPI.Data
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Loan> Loans { get; set; }
         public DbSet<Registration> Registrations { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<BookCategory> BooksCategories { get; set; } 
 
     }
 }

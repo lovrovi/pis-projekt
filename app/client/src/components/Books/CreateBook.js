@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPublishers } from '../../redux/actions/publishers/publishers'
 import { getAuthors } from '../../redux/actions/authors/authors'
-import { createBook } from '../../redux/actions/books/books'
+import { createBook, getCategories } from '../../redux/actions/books/books'
 import { Form, Formik } from 'formik';
 import { InputField } from '../../containers/InputField/InputField';
 import { Button } from '../../containers/Button/Button'
@@ -17,18 +17,21 @@ export const CreateBook = (props) => {
     const dispatch = useDispatch()
     const publishers = useSelector(state => state.publishers.publishers)
     const authors = useSelector(state => state.authors.authors)
+    const categories = useSelector(state => state.books.categories)
 
     const [checkedAuthors, setCheckedAuthors] = useState([])
+    const [checkedCategories, setCheckedCategories] = useState([])
     const [image, setImage] = useState()
 
-    const handleCreateBook = (values, checkedAuthors) => {
-        dispatch(createBook(values, checkedAuthors))
+    const handleCreateBook = (values, checkedAuthors, checkedCategories) => {
+        dispatch(createBook(values, checkedAuthors, checkedCategories))
         props.history.push("/books")
     }
 
     useEffect(() => {
         dispatch(getPublishers())
         dispatch(getAuthors())
+        dispatch(getCategories())
     }, [dispatch])
 
     const initialValues = {
@@ -37,7 +40,8 @@ export const CreateBook = (props) => {
         pages: "",
         price: "",
         image: image,
-        publisherId: publishers[0]?.id
+        publisherId: publishers[0]?.id,
+        isbn: ""
     }
 
     const authorsList = authors.map((author, index) => {
@@ -49,6 +53,21 @@ export const CreateBook = (props) => {
                         id={author.id}
                         options={checkedAuthors}
                         setOptions={setCheckedAuthors}
+                    />
+                </StyledTableCell>
+            </StyledTableRow>
+        )
+    })
+
+    const categoriesList = categories.map((category, index) => {
+        return (
+            <StyledTableRow key={category.id}>
+                <StyledTableCell align="center">{category.name}</StyledTableCell>
+                <StyledTableCell align="center">
+                    <Checkbox
+                        id={category.id}
+                        options={checkedCategories}
+                        setOptions={setCheckedCategories}
                     />
                 </StyledTableCell>
             </StyledTableRow>
@@ -71,7 +90,7 @@ export const CreateBook = (props) => {
                     <Formik
                         enableReinitialize
                         initialValues={initialValues}
-                        onSubmit={(values) => handleCreateBook(values, checkedAuthors)}
+                        onSubmit={(values) => handleCreateBook(values, checkedAuthors, checkedCategories)}
                         validationSchema={BookSchema}
                     >
                         {({
@@ -96,6 +115,10 @@ export const CreateBook = (props) => {
                                     label="Price"
                                 />
                                 <InputField
+                                    name="isbn"
+                                    label="ISBN"
+                                />
+                                <InputField
                                     name="publisherId"
                                     label="Publisher"
                                     as="select"
@@ -105,6 +128,10 @@ export const CreateBook = (props) => {
                                 <Table
                                     customTableData={authorsList}
                                     customTableHeader={["Author", "+"]}
+                                />
+                                <Table
+                                    customTableData={categoriesList}
+                                    customTableHeader={["Categories", "+"]}
                                 />
                                 <div className="detailsButtons">
                                     <Button

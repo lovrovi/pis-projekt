@@ -25,6 +25,7 @@ namespace LibraryAPI.Services
 
         public void DeleteImage(string image)
         {
+            if (image == "placeholder.png") return;
             File.Delete(Path.Join(_environment.WebRootPath, image));
         }
     }

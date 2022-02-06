@@ -190,11 +190,12 @@ export const createBookFail = () => {
     };
 };
 
-export const createBook = (book, checkedAuthors) => {
+export const createBook = (book, checkedAuthors, checkedCategories) => {
     return async (dispatch) => {
         // send request
         dispatch(createBookStart());
         book.authors = checkedAuthors
+        book.categories = checkedCategories
         const imageName = generateImageName(book.image.name)
         let formData = new FormData()
         formData.append("title", book.title)
@@ -203,8 +204,12 @@ export const createBook = (book, checkedAuthors) => {
         formData.append("price", book.price)
         formData.append("image", book.image, imageName)
         formData.append("publisherId", book.publisherId)
+        formData.append("ISBN", book.isbn)
         for (var i = 0; i < checkedAuthors.length; i++) {
             formData.append('authors', checkedAuthors[i]);
+        }
+        for (var i = 0; i < checkedCategories.length; i++) {
+            formData.append('categories', checkedCategories[i]);
         }
         axios({
             method: "POST",
@@ -295,4 +300,40 @@ export const getReservations = () => {
     };
 };
 
+export const getCategoriesStart = () => {
+    return {
+        type: actionsTypes.GET_CATEGORIES_START
+    };
+};
+export const getCategoriesSuccess = (categories) => {
+    return {
+        type: actionsTypes.GET_CATEGORIES_SUCCESS,
+        categories
+    };
+};
+export const getCategoriesFail = () => {
+    return {
+        type: actionsTypes.GET_CATEGORIES_FAIL
+    };
+};
 
+export const getCategories = () => {
+    return async (dispatch) => {
+        // send request
+        dispatch(getCategoriesStart());
+
+        axios({
+            method: "GET",
+            url: "/categories",
+        })
+            .then((data) => {
+                console.log("getCategories:", data);
+                dispatch(getCategoriesSuccess(data.data));
+
+            })
+            .catch((e) => {
+                console.error(e);
+                dispatch(getCategoriesFail());
+            });
+    };
+};

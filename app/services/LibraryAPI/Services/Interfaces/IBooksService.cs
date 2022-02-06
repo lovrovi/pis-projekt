@@ -15,6 +15,6 @@ namespace LibraryAPI.Services
         Task UpdateBook(int id, BookUpdateRequest request);
         Task DeleteBook(int id);
         Task<bool> CreateBook(BookCreateRequest book);
-
+        Task<IEnumerable<CategoryResponse>> GetCategories();
     }
 }

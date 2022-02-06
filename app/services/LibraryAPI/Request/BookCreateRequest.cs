@@ -12,5 +12,7 @@ namespace LibraryAPI.Request
         public float Price { get; set; }
         public int PublisherId { get; set; }
         public ICollection<int> Authors { get; set; }
+        public string ISBN { get; set; }
+        public ICollection<int> Categories { get; set; }
     }
 }

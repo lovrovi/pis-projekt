@@ -38,7 +38,8 @@ namespace LibraryAPI.Services
                 Image = b.Image,
                 Pages = b.Pages,
                 Price = b.Price,
-                Title = b.Title
+                Title = b.Title,
+                ISBN = b.ISBN,
             });
 
             return mappedBooks;
@@ -49,7 +50,13 @@ namespace LibraryAPI.Services
         {
             var response = new BookDetailsResponse();
 
-            var book = await _context.Books.Include(ab => ab.AuthorBook).ThenInclude(x => x.Author).Include(b => b.Publisher).FirstOrDefaultAsync(ab => ab.Id == id);
+            var book = await _context.Books
+                .Include(x => x.AuthorBook)
+                .ThenInclude(ab => ab.Author)
+                .Include(x => x.Publisher)
+                .Include(x => x.BookCategory)
+                .ThenInclude(bc => bc.Category)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (book == null) return null;
 
@@ -63,6 +70,12 @@ namespace LibraryAPI.Services
                 Name = ab.Author.Name
             });
 
+            var mappedCategories = book.BookCategory.Select(c => new CategoryResponse
+            {
+                Id = c.Category.Id,
+                Name = c.Category.Name,
+            });
+
             response = new BookDetailsResponse
             {
                 Id = book.Id,
@@ -73,7 +86,9 @@ namespace LibraryAPI.Services
                 Price = book.Price,
                 Title = book.Title,
                 Authors = mappedAuthors.ToList(),
-                PublisherName = book.Publisher.Name
+                PublisherName = book.Publisher.Name,
+                ISBN = book.ISBN,
+                Categories = mappedCategories.ToList(),
             };
 
             return response;
@@ -113,11 +128,18 @@ namespace LibraryAPI.Services
         public async Task<bool> CreateBook(BookCreateRequest book)
         {
             var validAuthors = _context.Authors.Where(a => book.Authors.Contains(a.Id));
-            if (validAuthors.Count() == 0) return false;
+            if (!validAuthors.Any()) return false;
+            var validCategories = _context.Categories.Where(x => book.Categories.Contains(x.Id));
+            if (!validCategories.Any()) return false;
 
             var authBooks = validAuthors.Select(x => new AuthorBook
             {
                 AuthorId = x.Id
+            }).ToList();
+
+            var bookCategories = validCategories.Select(x => new BookCategory
+            {
+                CategoryId = x.Id
             }).ToList();
 
             var mappedBook = new Book
@@ -128,7 +150,9 @@ namespace LibraryAPI.Services
                 Price = book.Price,
                 Title = book.Title,
                 PublisherId = book.PublisherId,
-                AuthorBook = authBooks
+                AuthorBook = authBooks,
+                BookCategory = bookCategories,
+                ISBN = book.ISBN,
             };
 
             await _fileService.CreateImage(book.Image);
@@ -137,11 +161,31 @@ namespace LibraryAPI.Services
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<IEnumerable<CategoryResponse>> GetCategories()
+        {
+            var categories = await _context.Categories.ToListAsync();
+
+            var response = categories.Select(x => new CategoryResponse
+            {
+                Id = x.Id,
+                Name = x.Name,
+            });
+
+            return response;
+        }
+
         private static Expression<Func<Book, bool>> Filter(string search)
         {
             search = search?.Trim().ToLower();
             float.TryParse(search, out float num);
-            return x => string.IsNullOrEmpty(search) || ((num > 0) && (x.Pages == num || x.Price == num)) || (x.Title.ToLower().Contains(search));
+
+            return x => string.IsNullOrEmpty(search) || 
+            ((num > 0) && (x.Pages == num || x.Price == num)) || 
+            (x.Title.ToLower().Contains(search)) ||
+            (x.BookCategory.Any(y => y.Category.Name.ToLower().Contains(search))) ||
+            (x.Publisher.Name.ToLower().Contains(search)) || 
+            (x.AuthorBook.Any(z => z.Author.Name.ToLower().Contains(search))) ||
+            (x.ISBN.ToLower().Contains(search));
         }
     }
 }

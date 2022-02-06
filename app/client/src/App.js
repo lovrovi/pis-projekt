@@ -25,7 +25,7 @@ function App() {
           <AdminHeader forceUpdate={forceUpdate} /> :
           <Header forceUpdate={forceUpdate}/>
       }
-      <div className="layout" onClick={update}>
+      <div className="layout">
         <Switch>
           <Route exact path="/" render={() => {
             return isLoggedIn() ?

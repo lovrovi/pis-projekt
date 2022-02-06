@@ -66,5 +66,13 @@ namespace LibraryAPI.Controllers
             }
             return Ok();
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("/api/Categories")]
+        public async Task<ActionResult> GetCategories()
+        {
+            return Ok( await _booksService.GetCategories() );
+        }
     }
 }
