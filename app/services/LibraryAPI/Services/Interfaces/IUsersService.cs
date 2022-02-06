@@ -10,5 +10,6 @@ namespace LibraryAPI.Services.Interfaces
         Task<IEnumerable<UsersResponse>> GetUsers();
         Task DeleteUser(int id);
         Task CreateUser(UserRequest request);
+        Task RegisterUser(string email);
     }
 }

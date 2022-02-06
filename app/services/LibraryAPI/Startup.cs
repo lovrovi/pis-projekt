@@ -1,5 +1,6 @@
 using FluentValidation.AspNetCore;
 using LibraryAPI.Data;
+using LibraryAPI.Dto;
 using LibraryAPI.Services;
 using LibraryAPI.Services.Interfaces;
 using LibraryAPI.Validations;
@@ -34,6 +35,7 @@ namespace LibraryAPI
                  .AllowAnyHeader());
             });
 
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(Configuration.GetConnectionString("DBConnection")));
             services.AddControllers();

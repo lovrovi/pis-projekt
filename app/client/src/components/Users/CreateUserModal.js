@@ -16,6 +16,18 @@ export const CreateUserModal = ({ showModal, handleShowModal }) => {
         handleShowModal()
     }
 
+    const users = [
+        'Admin', 'User'
+    ]
+
+    const groupTypeOptions = users.map(user => {
+        return (
+            <option key={user} value={user}>
+                {user}
+            </option>
+        )
+    })
+
     const initialValues = {
         userName: "",
         password: "",
@@ -48,6 +60,8 @@ export const CreateUserModal = ({ showModal, handleShowModal }) => {
                                 <InputField
                                     name="groupType"
                                     label="Group type"
+                                    as="select"
+                                    options={groupTypeOptions}
                                 />
                                 <Button
                                     text="SAVE"

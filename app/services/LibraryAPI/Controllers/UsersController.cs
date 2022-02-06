@@ -41,5 +41,13 @@ namespace LibraryAPI.Controllers
             await _usersService.CreateUser(request);
             return Ok();
         }
+
+        [HttpPost]
+        [Route("/api/registeruser")]
+        public async Task<ActionResult> RegisterUser([FromQuery] string mail)
+        {
+            await _usersService.RegisterUser(mail);
+            return Ok();
+        }
     }
 }
