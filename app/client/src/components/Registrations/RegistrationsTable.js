@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getRegistrations } from '../../redux/actions/auth/auth'
+import { getRegistrations, adminRegisterUser } from '../../redux/actions/auth/auth'
 import Loading from '../../containers/Loading/Loading'
 import { Table } from '../../containers/Table/Table'
 import './Registrations.css'
@@ -15,6 +15,11 @@ export const RegistrationsTable = () => {
     }, [//eslint-disable-line 
         dispatch])
 
+    const registerUser = (mail) => {
+        console.log(mail)
+        dispatch(adminRegisterUser(mail))
+    }
+
     return (
         <div className="registrationsTable">
             {
@@ -25,6 +30,7 @@ export const RegistrationsTable = () => {
                     <>
                         <Table
                             tableData={registrations}
+                            clickRegisterIconAction={registerUser}
                         />
                     </>
             }

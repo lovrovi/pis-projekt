@@ -42,6 +42,7 @@ namespace LibraryAPI.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpPost]
         [Route("/api/registeruser")]
         public async Task<ActionResult> RegisterUser([FromQuery] string mail)

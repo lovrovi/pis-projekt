@@ -208,8 +208,8 @@ export const createBook = (book, checkedAuthors, checkedCategories) => {
         for (var i = 0; i < checkedAuthors.length; i++) {
             formData.append('authors', checkedAuthors[i]);
         }
-        for (var i = 0; i < checkedCategories.length; i++) {
-            formData.append('categories', checkedCategories[i]);
+        for (var j = 0; j < checkedCategories.length; j++) {
+            formData.append('categories', checkedCategories[j]);
         }
         axios({
             method: "POST",

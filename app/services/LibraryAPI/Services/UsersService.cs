@@ -65,13 +65,15 @@ namespace LibraryAPI.Services
 
         public async Task RegisterUser(string email)
         {
+            var registration = await _context.Registrations.Where(x => x.Email == email).ToListAsync();
+            if (!registration.Any()) return;
+
             var request = new UserRequest
             {
                 UserName = email,
                 Password = "sifra123",
                 GroupType = GroupType.User
             };
-
             await CreateUser(request);
 
             MimeMessage message = new MimeMessage();
@@ -93,6 +95,9 @@ namespace LibraryAPI.Services
             client.Send(message);
             client.Disconnect(true);
             client.Dispose();
+
+            _context.Registrations.RemoveRange(registration);
+            await _context.SaveChangesAsync();
         }
     }
 }

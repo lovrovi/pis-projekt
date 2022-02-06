@@ -22,7 +22,8 @@ export const Table = (
         clickDeleteIconAction,
         clickCommentIconAction,
         clickReservationIconAction,
-        clickUpdateIconAction
+        clickUpdateIconAction,
+        clickRegisterIconAction
     }) => {
     const classes = useTableStyles();
 
@@ -53,7 +54,8 @@ export const Table = (
                         clickDeleteIconAction ||
                         clickCommentIconAction ||
                         clickReservationIconAction ||
-                        clickUpdateIconAction) &&
+                        clickUpdateIconAction ||
+                        clickRegisterIconAction) &&
                         <StyledTableCell align="center">
                             <div className="actionButtons">
                                 <span
@@ -87,6 +89,12 @@ export const Table = (
                                 >
                                     {clickReservationIconAction ? <AiTwotoneCalendar size={22} /> : ""}
                                 </span>
+                                <span
+                                    className="actionButton"
+                                    onClick={() => clickRegisterIconAction(row.email)}
+                                >
+                                    {clickRegisterIconAction ? <AiFillCheckSquare size={22} /> : ""}
+                                </span>
                             </div>
                         </StyledTableCell>
                     }
@@ -110,7 +118,8 @@ export const Table = (
                                     (clickEditIconAction ||
                                     clickDeleteIconAction ||
                                     clickCommentIconAction ||
-                                    clickReservationIconAction) &&
+                                    clickReservationIconAction ||
+                                    clickRegisterIconAction) &&
                                     <StyledTableCell align="center">Actions</StyledTableCell>
                                 }
 

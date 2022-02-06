@@ -129,3 +129,21 @@ export const getRegistrations = () => {
             });
     };
 };
+
+export const adminRegisterUser = (mail) => {
+    return async (dispatch) => {
+        // send request
+        axios({
+            method: "POST",
+            url: "/registeruser",
+            params: {mail}
+        })
+            .then((data) => {
+                console.log("register:", data);
+                dispatch(getRegistrations())
+            })
+            .catch((e) => {
+                console.error(e);
+            });
+    };
+};
